@@ -15,12 +15,16 @@ namespace hospitalsystem.Services
         {
             while (true)
             {
-                Console.WriteLine($"\nWelcome {_patient.FullName}!");
-                Console.WriteLine("1. Book Appointment");
-                Console.WriteLine("2. View My Bookings");
-                Console.WriteLine("3. Exit");
+                Console.Clear();
+                Console.WriteLine("╔════════════════════════════════════════════╗");
+                Console.WriteLine($"║         Welcome {_patient.FullName,-26}   ║");
+                Console.WriteLine("╠════════════════════════════════════════════╣");
+                Console.WriteLine("║ 1. Book Appointment                        ║");
+                Console.WriteLine("║ 2. View My Bookings                        ║");
+                Console.WriteLine("║ 3. Exit                                    ║");
+                Console.WriteLine("╚════════════════════════════════════════════╝");
+                Console.Write("Choose an option (1-3): ");
 
-                Console.Write("Choose an option: ");
                 string choice = Console.ReadLine()!;
 
                 switch (choice)

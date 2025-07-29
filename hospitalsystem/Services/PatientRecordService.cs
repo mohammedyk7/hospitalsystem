@@ -8,11 +8,15 @@ namespace hospitalsystem.services
         {
             while (true)
             {
-                Console.WriteLine("\nPatient Records Menu:");
-                Console.WriteLine("1. View All Patient Records");
-                Console.WriteLine("2. Exit");
+                Console.Clear();
+                Console.WriteLine("╔══════════════════════════════════════╗");
+                Console.WriteLine("║         PATIENT RECORDS MENU         ║");
+                Console.WriteLine("╠══════════════════════════════════════╣");
+                Console.WriteLine("║ 1. View All Patient Records          ║");
+                Console.WriteLine("║ 2. Exit                              ║");
+                Console.WriteLine("╚══════════════════════════════════════╝");
+                Console.Write("Choose an option (1-2): ");
 
-                Console.Write("Choose an option: ");
                 string? choice = Console.ReadLine();
 
                 switch (choice)

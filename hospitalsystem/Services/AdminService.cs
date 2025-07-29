@@ -15,14 +15,18 @@ namespace hospitalsystem.services
         {
             while (true)
             {
-                Console.WriteLine($"\nWelcome Admin {_admin.FullName}!");
-                Console.WriteLine("1. Add Clinic");
-                Console.WriteLine("2. View All Clinics");
-                Console.WriteLine("3. View All Branches");
-                Console.WriteLine("4. View All Departments");
-                Console.WriteLine("5. Exit");
+                Console.Clear();
+                Console.WriteLine("╔════════════════════════════════════════════╗");
+                Console.WriteLine($"║      Welcome, Admin {_admin.FullName,-25} ║");
+                Console.WriteLine("╠════════════════════════════════════════════╣");
+                Console.WriteLine("║ 1.   Add Clinic                            ║");
+                Console.WriteLine("║ 2.    View All Clinics                     ║");
+                Console.WriteLine("║ 3.    View All Branches                    ║");
+                Console.WriteLine("║ 4.    View All Departments                 ║");
+                Console.WriteLine("║ 5.    Exit                                 ║");
+                Console.WriteLine("╚════════════════════════════════════════════╝");
+                Console.Write(" Choose an option (1-5): ");
 
-                Console.Write("Choose an option: ");
                 string? choice = Console.ReadLine();
 
                 switch (choice)

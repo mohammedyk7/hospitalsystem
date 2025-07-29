@@ -15,11 +15,16 @@
         {
             while (true)
             {
-                Console.WriteLine("\n----- Admin Menu -----");
-                Console.WriteLine("1. Assign Doctor to Clinic");
-                Console.WriteLine("2. View All Doctors");
-                Console.WriteLine("3. Exit");
-                Console.Write("Choice: ");
+                Console.Clear();
+                Console.WriteLine("╔══════════════════════════════════════╗");
+                Console.WriteLine("║                ADMIN MENU            ║");
+                Console.WriteLine("╠══════════════════════════════════════╣");
+                Console.WriteLine("║    1. Assign Doctor to Clinic        ║");
+                Console.WriteLine("║   2. View All Doctors                ║");
+                Console.WriteLine("║    3. Exit                           ║");
+                Console.WriteLine("╚══════════════════════════════════════╝");
+                Console.Write(" Enter your choice (1-3): ");
+
                 string choice = Console.ReadLine()!;
 
                 switch (choice)

@@ -1,7 +1,10 @@
-﻿namespace hospitalsystem.models
+﻿using System.Reflection;
+
+namespace hospitalsystem.models
 {
     public class Patient : User
     {
+        public Patient() : base("", "") { }
         public Patient(string fullName, string email)
             : base(fullName, email)
         {
@@ -15,7 +18,20 @@
         }
 
 
+     
 
+        // Optional constructor for manual use
+        //public Patient(string fullName, string email, string password, string nationalId, int age, string gender, string phoneNumber)
+        //{
+        //    Id = Guid.NewGuid().ToString();
+        //    FullName = fullName;
+        //    Email = email;
+        //    Password = password;
+        //    NationalId = nationalId;
+        //    Age = age;
+        //    Gender = gender;
+        //    PhoneNumber = phoneNumber;
+        //}
 
 
         public void BookAppointment()

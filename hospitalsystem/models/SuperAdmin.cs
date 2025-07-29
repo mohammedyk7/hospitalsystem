@@ -21,15 +21,19 @@ namespace hospitalsystem.models
         {
             while (true)
             {
-                Console.WriteLine("\n----- Super Admin Menu -----");
-                Console.WriteLine("1. Create Branch");
-                Console.WriteLine("2. Assign Department to Branch");
-                Console.WriteLine("3. View All Branches");
-                Console.WriteLine("4. Create Doctor");
-                Console.WriteLine("5. View All Doctors");
+                Console.Clear();
+                Console.WriteLine("╔════════════════════════════════════════════╗");
+                Console.WriteLine("║            SUPER ADMIN MENU                ║");
+                Console.WriteLine("╠════════════════════════════════════════════╣");
+                Console.WriteLine("║ 1.   Create Branch                         ║");
+                Console.WriteLine("║ 2.   Assign Department to Branch           ║");
+                Console.WriteLine("║ 3.   View All Branches                     ║");
+                Console.WriteLine("║ 4.    Create Doctor                        ║");
+                Console.WriteLine("║ 5.   View All Doctors                      ║");
+                Console.WriteLine("║ 6.   Exit                                  ║");
+                Console.WriteLine("╚════════════════════════════════════════════╝");
+                Console.Write(" Enter your choice (1-6): ");
 
-                Console.WriteLine("6. Exit");
-                Console.Write("Choice: ");
                 string choice = Console.ReadLine()!;
 
                 switch (choice)

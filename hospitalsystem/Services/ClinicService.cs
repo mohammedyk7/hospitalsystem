@@ -8,10 +8,16 @@ namespace hospitalsystem.services
         {
             while (true)
             {
-                Console.WriteLine("\nClinic Management Menu:");
-                Console.WriteLine("1. Add Clinic");
-                Console.WriteLine("2. View All Clinics");
-                Console.WriteLine("3. Exit");
+                Console.Clear();
+                Console.WriteLine("╔══════════════════════════════════════╗");
+                Console.WriteLine("║        CLINIC MANAGEMENT MENU        ║");
+                Console.WriteLine("╠══════════════════════════════════════╣");
+                Console.WriteLine("║ 1. Add Clinic                        ║");
+                Console.WriteLine("║ 2. View All Clinics                  ║");
+                Console.WriteLine("║ 3. Exit                              ║");
+                Console.WriteLine("╚══════════════════════════════════════╝");
+                Console.Write("Choose an option (1-3): ");
+
 
                 Console.Write("Choose an option: ");
                 string? choice = Console.ReadLine();
