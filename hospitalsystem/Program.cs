@@ -1,6 +1,7 @@
 ﻿using hospitalsystem.models;
 using hospitalsystem.services;
 using hospitalsystem.Services;
+using System.Linq;
 
 class Program
 {
@@ -15,7 +16,14 @@ class Program
         HospitalData.Departments = FileStorage.LoadFromFile<Department>("departments.json");
         HospitalData.Clinics = FileStorage.LoadFromFile<Clinic>("clinics.json");
 
-        // Ensure at least one test patient exists
+        // Ensure test Doctor exists
+        if (!HospitalData.Doctors.Any(d => d.Email == "ali@hospital.com"))
+        {
+            HospitalData.Doctors.Add(new Doctor("Dr. Ali", "ali@hospital.com", "123", 1));
+            FileStorage.SaveToFile("doctors.json", HospitalData.Doctors);
+        }
+
+        // Ensure test Patient exists
         if (!HospitalData.Patients.Any(p => p.Email == "yusuf@patient.com"))
         {
             HospitalData.Patients.Add(new Patient("Yusuf", "yusuf@patient.com", "123"));
