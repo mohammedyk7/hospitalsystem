@@ -9,7 +9,7 @@
 
 
         public User() { }
-        protected User(string fullName, string email)
+        public User(string fullName, string email)
         {
             FullName = fullName;
             Email = email;
@@ -17,12 +17,15 @@
 
 
 
-        protected User(string fullName, string email, string password)
+
+        public User(string fullName, string email, string password)
         {
             FullName = fullName;
             Email = email;
             Password = password;
         }
+
+
 
         public abstract void DisplayMenu();
     }

@@ -4,11 +4,13 @@
     {
         public int ClinicId { get; set; } = 0;
 
+
+        public Doctor() { }
         // ✅ Parameterless constructor for JSON deserialization
-        public Doctor() : base()
-        {
-            Role = "Doctor";
-        }
+        //public Doctor() : base()
+        //{
+        //    Role = "Doctor";
+        //}
 
         public Doctor(string fullName, string email)
             : base(fullName, email)
@@ -34,12 +36,17 @@
         {
             while (true)
             {
-                Console.WriteLine("\n----- Doctor Menu -----");
-                Console.WriteLine("1. View My Appointments");
-                Console.WriteLine("2. Write Patient Record");
-                Console.WriteLine("3. View My Records");
-                Console.WriteLine("4. Exit");
-                Console.Write("Choice: ");
+                Console.Clear();
+                Console.WriteLine("╔══════════════════════════════════════╗");
+                Console.WriteLine("║              DOCTOR MENU             ║");
+                Console.WriteLine("╠══════════════════════════════════════╣");
+                Console.WriteLine("║ 1.    View My Appointments           ║");
+                Console.WriteLine("║ 2.    Write Patient Record           ║");
+                Console.WriteLine("║ 3.    View My Records                ║");
+                Console.WriteLine("║ 4.    Exit                           ║");
+                Console.WriteLine("╚══════════════════════════════════════╝");
+                Console.Write("👉 Enter your choice (1-4): ");
+
                 string choice = Console.ReadLine()!;
 
                 switch (choice)
