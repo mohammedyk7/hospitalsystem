@@ -43,7 +43,7 @@
             Console.WriteLine($"\nYour Bookings, {FullName}:");
 
             var myBookings = HospitalData.Bookings
-                .Where(b => b.PatientName.Equals(FullName, StringComparison.OrdinalIgnoreCase))
+                .Where(b => b.PatientEmail.Equals(FullName, StringComparison.OrdinalIgnoreCase))
                 .ToList();
 
             if (myBookings.Count == 0)

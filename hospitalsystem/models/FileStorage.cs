@@ -16,5 +16,21 @@ namespace hospitalsystem.models
             var json = File.ReadAllText(fileName);
             return JsonSerializer.Deserialize<List<T>>(json) ?? new List<T>();
         }
+
+        // ✅ Specific loaders
+        public static List<Doctor> LoadDoctors()
+        {
+            return LoadFromFile<Doctor>("doctors.json");
+        }
+
+        public static List<Patient> LoadPatients()
+        {
+            return LoadFromFile<Patient>("patients.json");
+        }
+
+        public static List<Booking> LoadBookings()
+        {
+            return LoadFromFile<Booking>("bookings.json");
+        }
     }
 }

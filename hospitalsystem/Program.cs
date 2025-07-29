@@ -1,36 +1,93 @@
 ﻿using hospitalsystem.models;
+using hospitalsystem.services;
+using hospitalsystem.Services;
 
 class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("===== Welcome to the Hospital Management System =====");
+        // Load existing data from JSON files
+        HospitalData.Doctors = FileStorage.LoadFromFile<Doctor>("doctors.json");
+        HospitalData.Patients = FileStorage.LoadFromFile<Patient>("patients.json");
+        HospitalData.Bookings = FileStorage.LoadFromFile<Booking>("bookings.json");
+        HospitalData.Records = FileStorage.LoadFromFile<PatientRecord>("records.json");
+        HospitalData.Branches = FileStorage.LoadFromFile<Branch>("branches.json");
+        HospitalData.Departments = FileStorage.LoadFromFile<Department>("departments.json");
+        HospitalData.Clinics = FileStorage.LoadFromFile<Clinic>("clinics.json");
 
-        // Load existing data from files (optional, if implemented)
-        // HospitalData.Doctors = FileStorage.LoadFromFile<Doctor>("doctors.json");
-        // HospitalData.Patients = FileStorage.LoadFromFile<Patient>("patients.json");
+        Console.WriteLine("✅ Data loaded successfully.");
+        Console.WriteLine($"Doctors: {HospitalData.Doctors.Count}");
+        Console.WriteLine($"Patients: {HospitalData.Patients.Count}");
+        Console.WriteLine($"Bookings: {HospitalData.Bookings.Count}");
+        Console.WriteLine($"Records: {HospitalData.Records.Count}");
+        Console.WriteLine($"Branches: {HospitalData.Branches.Count}");
+        Console.WriteLine($"Departments: {HospitalData.Departments.Count}");
+        Console.WriteLine($"Clinics: {HospitalData.Clinics.Count}");
 
         while (true)
         {
-            Console.WriteLine("\n--- Login ---");
-            Console.Write("Email: ");
-            string email = Console.ReadLine()!;
-            Console.Write("Password: ");
-            string password = Console.ReadLine()!;
+            Console.WriteLine("\n🏥 Welcome to Silaf Hospital System:");
+            Console.WriteLine("1. Super Admin Login");
+            Console.WriteLine("2. Doctor Login");
+            Console.WriteLine("3. Patient Login");
+            Console.WriteLine("4. Exit");
+            Console.Write("Select an option: ");
+            string? input = Console.ReadLine();
 
-            // Try to find the matching user
-            var user = HospitalData.Users.FirstOrDefault(u => u.Email == email && u.Password == password);
-
-            if (user != null)
+            switch (input)
             {
-                Console.WriteLine($"\n✅ Welcome {user.FullName} ({user.Role})");
+                case "1":
+                    SuperAdmin superAdmin = new SuperAdmin("Main Admin", "admin@hospital.com", "admin123");
+                    superAdmin.DisplayMenu();
+                    break;
 
-                // Call the corresponding menu based on role
-                user.DisplayMenu();
-            }
-            else
-            {
-                Console.WriteLine("\n❌ Invalid email or password. Try again.\n");
+                case "2":
+                    Console.Write("Enter your email: ");
+                    string dEmail = Console.ReadLine();
+                    Console.Write("Enter your password: ");
+                    string dPassword = Console.ReadLine();
+
+                    Doctor? doctor = HospitalData.Doctors
+                        .FirstOrDefault(d => d.Email == dEmail && d.Password == dPassword);
+
+                    if (doctor != null)
+                    {
+                        DoctorService dService = new DoctorService(doctor);
+                        dService.DisplayDoctorMenu();
+                    }
+                    else
+                    {
+                        Console.WriteLine("❌ Invalid doctor credentials.");
+                    }
+                    break;
+
+                case "3":
+                    Console.Write("Enter your email: ");
+                    string pEmail = Console.ReadLine();
+                    Console.Write("Enter your password: ");
+                    string pPassword = Console.ReadLine();
+
+                    Patient? patient = HospitalData.Patients
+                        .FirstOrDefault(p => p.Email == pEmail && p.Password == pPassword);
+
+                    if (patient != null)
+                    {
+                        PatientService pService = new PatientService(patient);
+                        pService.DisplayPatientMenu();
+                    }
+                    else
+                    {
+                        Console.WriteLine("❌ Invalid patient credentials.");
+                    }
+                    break;
+
+                case "4":
+                    Console.WriteLine("👋 Exiting system. Goodbye!");
+                    return;
+
+                default:
+                    Console.WriteLine("⚠️ Invalid selection. Try again.");
+                    break;
             }
         }
     }

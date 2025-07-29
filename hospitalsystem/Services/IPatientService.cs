@@ -1,15 +1,48 @@
-﻿// ─────────────────────────────
-// 📁 Services/PatientService.cs
-// ─────────────────────────────
-using hospitalsystem.models;
+﻿using hospitalsystem.models;
 
 namespace hospitalsystem.Services
 {
     public class PatientService
     {
-        public void BookAppointment(string fullName, string email)
+        private Patient _patient;
+
+        public PatientService(Patient patient)
         {
-            Console.Write("Enter Appointment Date (yyyy-mm-dd): ");
+            _patient = patient;
+        }
+
+        public void DisplayPatientMenu()
+        {
+            while (true)
+            {
+                Console.WriteLine($"\nWelcome {_patient.FullName}!");
+                Console.WriteLine("1. Book Appointment");
+                Console.WriteLine("2. View My Bookings");
+                Console.WriteLine("3. Exit");
+
+                Console.Write("Choose an option: ");
+                string choice = Console.ReadLine()!;
+
+                switch (choice)
+                {
+                    case "1":
+                        BookAppointment();
+                        break;
+                    case "2":
+                        ViewMyBookings();
+                        break;
+                    case "3":
+                        return;
+                    default:
+                        Console.WriteLine("Invalid choice. Try again.");
+                        break;
+                }
+            }
+        }
+
+        private void BookAppointment()
+        {
+            Console.Write("Enter Appointment Date (yyyy-MM-dd HH:mm): ");
             DateTime date = DateTime.Parse(Console.ReadLine()!);
 
             Console.Write("Enter Clinic ID: ");
@@ -17,20 +50,17 @@ namespace hospitalsystem.Services
 
             int id = HospitalData.Bookings.Count + 1;
 
-            var booking = new Booking(id, fullName, email, clinicId, date);
+            var booking = new Booking(id, _patient.FullName, _patient.Email, clinicId, date);
             HospitalData.Bookings.Add(booking);
-
             FileStorage.SaveToFile("bookings.json", HospitalData.Bookings);
 
             Console.WriteLine("Appointment booked successfully.");
         }
 
-
-
-        public static void ViewMyBookings(Patient patient)
+        private void ViewMyBookings()
         {
             var myBookings = HospitalData.Bookings
-                .Where(b => b.PatientEmail == patient.Email)
+                .Where(b => b.PatientEmail == _patient.Email)
                 .ToList();
 
             if (!myBookings.Any())
