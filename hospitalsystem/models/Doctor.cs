@@ -2,8 +2,13 @@
 {
     public class Doctor : User
     {
-
         public int ClinicId { get; set; } = 0;
+
+        // ✅ Parameterless constructor for JSON deserialization
+        public Doctor() : base()
+        {
+            Role = "Doctor";
+        }
 
         public Doctor(string fullName, string email)
             : base(fullName, email)
@@ -12,22 +17,18 @@
         }
 
         public Doctor(string fullName, string email, int clinicId)
-    : base(fullName, email)
+            : base(fullName, email)
         {
             Role = "Doctor";
             ClinicId = clinicId;
         }
 
         public Doctor(string fullName, string email, string password, int clinicId)
-    : base(fullName, email, password)
+            : base(fullName, email, password)
         {
             ClinicId = clinicId;
             Role = "Doctor";
         }
-
-
-
-
 
         public override void DisplayMenu()
         {
@@ -61,7 +62,6 @@
                 }
             }
         }
-
 
         public void ViewMyAppointments()
         {
@@ -102,7 +102,6 @@
             Console.WriteLine("Patient record added successfully.\n");
         }
 
-
         public void CreateDoctor()
         {
             Console.Write("Enter Doctor Name: ");
@@ -125,9 +124,5 @@
         {
             Console.WriteLine($"Doctor Name: {FullName}, Email: {Email}, Clinic ID: {ClinicId}");
         }
-
-
-
-
     }
 }

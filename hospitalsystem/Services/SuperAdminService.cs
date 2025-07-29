@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace hospitalsystem.Services
 {
-    internal class IAuthService
+    internal class SuperAdminService
     {
     }
 }

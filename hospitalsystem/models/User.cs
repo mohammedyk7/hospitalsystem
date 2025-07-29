@@ -7,11 +7,15 @@
         public string Password { get; set; }
         public string Role { get; set; }
 
+
+        public User() { }
         protected User(string fullName, string email)
         {
             FullName = fullName;
             Email = email;
         }
+
+
 
         protected User(string fullName, string email, string password)
         {

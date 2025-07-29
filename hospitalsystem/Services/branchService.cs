@@ -4,7 +4,7 @@ using hospitalsystem.models;
 
 namespace hospitalsystem.services
 {
-    public static class IBranchService
+    public static class branchService
     {
         public static void SeedData()
         {
