@@ -5,6 +5,8 @@ namespace hospitalsystem.models
     public class Patient : User
     {
         public Patient() : base("", "") { }
+
+        public Patient() : base("", "") { }
         public Patient(string fullName, string email)
             : base(fullName, email)
         {
