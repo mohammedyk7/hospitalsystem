@@ -1,8 +1,7 @@
-﻿using hospitalsystem.models;
+﻿using hospitalsystem.Interface;
+using hospitalsystem.models;
 using hospitalsystem.services;
 using hospitalsystem.Services;
-using System.Linq;
-
 using System.Linq;
 
 class Program
@@ -31,6 +30,7 @@ class Program
         Console.WriteLine($"Branches: {HospitalData.Branches.Count}");
         Console.WriteLine($"Departments: {HospitalData.Departments.Count}");
         Console.WriteLine($"Clinics: {HospitalData.Clinics.Count}");
+
         while (true)
         {
             Console.Clear();
@@ -51,45 +51,53 @@ class Program
                     SuperAdmin superAdmin = new SuperAdmin("Main Admin", "admin@hospital.com", "admin123");
                     superAdmin.DisplayMenu();
                     break;
+
                 case "2":
                     Console.Write("Enter your email: ");
                     string dEmail = Console.ReadLine();
                     Console.Write("Enter your password: ");
                     string dPassword = Console.ReadLine();
-                    Doctor? doctor = HospitalData.Doctors
-                        .FirstOrDefault(d => d.Email == dEmail && d.Password == dPassword);
+
+                    Doctor? doctor = HospitalData.Doctors.FirstOrDefault(d => d.Email == dEmail && d.Password == dPassword);
                     if (doctor != null)
                     {
-                        DoctorService dService = new DoctorService(doctor);
+                        IDoctorService dService = new DoctorService(doctor);
                         dService.DisplayDoctorMenu();
+
+
                     }
                     else
                     {
-                        Console.WriteLine(":x: Invalid doctor credentials.");
+                        Console.WriteLine("❌ Invalid doctor credentials.");
+                        Console.ReadKey();
                     }
                     break;
+
                 case "3":
                     Console.Write("Enter your email: ");
                     string pEmail = Console.ReadLine();
                     Console.Write("Enter your password: ");
                     string pPassword = Console.ReadLine();
-                    Patient? patient = HospitalData.Patients
-                        .FirstOrDefault(p => p.Email == pEmail && p.Password == pPassword);
+
+                    Patient? patient = HospitalData.Patients.FirstOrDefault(p => p.Email == pEmail && p.Password == pPassword);
                     if (patient != null)
                     {
-                        PatientService pService = new PatientService(patient);
+                        IPatientService pService = new PatientService(patient);
                         pService.DisplayPatientMenu();
                     }
                     else
                     {
-                        Console.WriteLine(":x: Invalid patient credentials.");
+                        Console.WriteLine("❌ Invalid patient credentials.");
+                        Console.ReadKey();
                     }
                     break;
+
                 case "4":
-                    Console.WriteLine(":wave: Exiting system. Goodbye!");
+                    Console.WriteLine("👋 Exiting system. Goodbye!");
                     return;
+
                 default:
-                    Console.WriteLine(":warning: Invalid selection. Try again.");
+                    Console.WriteLine("⚠️ Invalid selection. Try again.");
                     break;
             }
         }

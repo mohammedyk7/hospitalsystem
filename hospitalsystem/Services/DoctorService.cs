@@ -3,7 +3,7 @@ using hospitalsystem.Interface;
 
 namespace hospitalsystem.services
 {
-    public class DoctorService: IDoctorService
+    public class DoctorService : IDoctorService
     {
         private Doctor _doctor;
 
@@ -12,6 +12,7 @@ namespace hospitalsystem.services
             _doctor = doctor;
         }
 
+        // ✅ Implements DisplayDoctorMenu
         public void DisplayDoctorMenu()
         {
             while (true)
@@ -27,7 +28,6 @@ namespace hospitalsystem.services
                 Console.WriteLine("║ 5. Exit                                    ║");
                 Console.WriteLine("╚════════════════════════════════════════════╝");
                 Console.Write("Choose an option (1-5): ");
-
 
                 string? choice = Console.ReadLine();
 
@@ -52,6 +52,31 @@ namespace hospitalsystem.services
                         break;
                 }
             }
+        }
+
+        // ✅ Implements AddDoctor
+        public void AddDoctor(Doctor doctor)
+        {
+            HospitalData.Doctors.Add(doctor);
+            FileStorage.SaveToFile("doctors.json", HospitalData.Doctors);
+        }
+
+        // ✅ Implements GetAllDoctors
+        public List<Doctor> GetAllDoctors()
+        {
+            return HospitalData.Doctors;
+        }
+
+        // ✅ Implements GetDoctorByEmail
+        public Doctor? GetDoctorByEmail(string email)
+        {
+            return HospitalData.Doctors.FirstOrDefault(d => d.Email == email);
+        }
+
+        // ✅ Implements Authenticate
+        public bool Authenticate(string email, string password)
+        {
+            return HospitalData.Doctors.Any(d => d.Email == email && d.Password == password);
         }
 
         private void ViewMyBookings()

@@ -1,9 +1,9 @@
 ﻿using hospitalsystem.models;
 using hospitalsystem.Interface;
 
-namespace hospitalsystem.Services
+namespace hospitalsystem.services
 {
-    public class PatientService: IPatientService
+    public class PatientService : IPatientService
     {
         private Patient _patient;
 
@@ -18,48 +18,32 @@ namespace hospitalsystem.Services
             {
                 Console.Clear();
                 Console.WriteLine("╔════════════════════════════════════════════╗");
-                Console.WriteLine($"║         Welcome {_patient.FullName,-26}   ║");
+                Console.WriteLine($"║    Welcome {_patient.FullName,-30} ║");
                 Console.WriteLine("╠════════════════════════════════════════════╣");
-                Console.WriteLine("║ 1. Book Appointment                        ║");
-                Console.WriteLine("║ 2. View My Bookings                        ║");
+                Console.WriteLine("║ 1. View My Bookings                        ║");
+                Console.WriteLine("║ 2. View My Records                         ║");
                 Console.WriteLine("║ 3. Exit                                    ║");
                 Console.WriteLine("╚════════════════════════════════════════════╝");
                 Console.Write("Choose an option (1-3): ");
 
-                string choice = Console.ReadLine()!;
+                string? choice = Console.ReadLine();
 
                 switch (choice)
                 {
                     case "1":
-                        BookAppointment();
+                        ViewMyBookings();
                         break;
                     case "2":
-                        ViewMyBookings();
+                        ViewMyRecords();
                         break;
                     case "3":
                         return;
                     default:
                         Console.WriteLine("Invalid choice. Try again.");
+                        Console.ReadKey();
                         break;
                 }
             }
-        }
-
-        private void BookAppointment()
-        {
-            Console.Write("Enter Appointment Date (yyyy-MM-dd HH:mm): ");
-            DateTime date = DateTime.Parse(Console.ReadLine()!);
-
-            Console.Write("Enter Clinic ID: ");
-            int clinicId = int.Parse(Console.ReadLine()!);
-
-            int id = HospitalData.Bookings.Count + 1;
-
-            var booking = new Booking(id, _patient.FullName, _patient.Email, clinicId, date);
-            HospitalData.Bookings.Add(booking);
-            FileStorage.SaveToFile("bookings.json", HospitalData.Bookings);
-
-            Console.WriteLine("Appointment booked successfully.");
         }
 
         private void ViewMyBookings()
@@ -70,12 +54,34 @@ namespace hospitalsystem.Services
 
             if (!myBookings.Any())
             {
-                Console.WriteLine("No bookings found.\n");
+                Console.WriteLine("No bookings found.");
+                Console.ReadKey();
                 return;
             }
 
             foreach (var booking in myBookings)
                 booking.Display();
+
+            Console.ReadKey();
+        }
+
+        private void ViewMyRecords()
+        {
+            var myRecords = HospitalData.Records
+                .Where(r => r.PatientName.Equals(_patient.FullName, StringComparison.OrdinalIgnoreCase))
+                .ToList();
+
+            if (!myRecords.Any())
+            {
+                Console.WriteLine("No records found.");
+                Console.ReadKey();
+                return;
+            }
+
+            foreach (var record in myRecords)
+                record.Display();
+
+            Console.ReadKey();
         }
     }
 }

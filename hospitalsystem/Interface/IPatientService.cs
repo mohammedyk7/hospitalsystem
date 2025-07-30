@@ -7,14 +7,9 @@ using System.Threading.Tasks;
 
 namespace hospitalsystem.Interface
 {
-    interface IPatientService
+    public interface IPatientService
     {
-        public interface IPatientService
-        {
-            void AddPatient(Patient patient);
-            List<Patient> GetAllPatients();
-            Patient? GetByEmail(string email);
-            bool Authenticate(string email, string password);
-        }
+        void DisplayPatientMenu();  // <- MUST BE INCLUDED
+        // Add more method signatures as needed
     }
 }
