@@ -1,8 +1,8 @@
 ﻿using hospitalsystem.models;
-
+using hospitalsystem.Interface;
 namespace hospitalsystem.services
 {
-    public class BookingService
+    public class BookingService: IBookingService
     {
         public void DisplayBookingMenu()
         {

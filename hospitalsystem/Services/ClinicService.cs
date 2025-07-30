@@ -1,8 +1,8 @@
 ﻿using hospitalsystem.models;
-
+using hospitalsystem.Interface;
 namespace hospitalsystem.services
 {
-    public class ClinicService
+    public class ClinicService: IClinicService
     {
         public void DisplayClinicMenu()
         {

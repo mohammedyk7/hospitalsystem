@@ -1,8 +1,9 @@
 ﻿using hospitalsystem.models;
+using hospitalsystem.Interface;
 
 namespace hospitalsystem.Services
 {
-    public class PatientService
+    public class PatientService: IPatientService
     {
         private Patient _patient;
 
