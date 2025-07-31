@@ -10,6 +10,8 @@ namespace hospitalsystem.models
         public int ClinicId { get; set; }
         public DateTime AppointmentDate { get; set; }
 
+        public Booking() { }
+
         public Booking(int id, string patientEmail, string doctorEmail, int clinicId, DateTime appointmentDate)
         {
             Id = id;

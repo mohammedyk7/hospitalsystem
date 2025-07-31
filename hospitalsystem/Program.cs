@@ -40,9 +40,11 @@ class Program
             Console.WriteLine("║ 1. Super Admin Login                       ║");
             Console.WriteLine("║ 2. Doctor Login                            ║");
             Console.WriteLine("║ 3. Patient Login                           ║");
-            Console.WriteLine("║ 4. Exit                                    ║");
+            Console.WriteLine("║ 4. Admin Login                             ║");
+            Console.WriteLine("║ 5. Patient Sign Up                         ║");
+            Console.WriteLine("║ 6. Exit                                    ║");
             Console.WriteLine("╚════════════════════════════════════════════╝");
-            Console.Write("Select an option (1-4): ");
+            Console.Write("Select an option (1-6): ");
 
             string? input = Console.ReadLine();
             switch (input)
@@ -63,8 +65,6 @@ class Program
                     {
                         IDoctorService dService = new DoctorService(doctor);
                         dService.DisplayDoctorMenu();
-
-
                     }
                     else
                     {
@@ -93,13 +93,69 @@ class Program
                     break;
 
                 case "4":
-                    Console.WriteLine("👋 Exiting system. Goodbye!");
+                    Console.Write("Enter your email: ");
+                    string aEmail = Console.ReadLine();
+                    Console.Write("Enter your password: ");
+                    string aPassword = Console.ReadLine();
+
+                    Admin? admin = HospitalData.Users.OfType<Admin>()
+                        .FirstOrDefault(a => a.Email == aEmail && a.Password == aPassword);
+
+                    if (admin != null)
+                    {
+                        AdminService aService = new AdminService(admin);
+                        aService.DisplayAdminMenu();
+                    }
+                    else
+                    {
+                        Console.WriteLine("❌ Invalid admin credentials.");
+                        Console.ReadKey();
+                    }
+                    break;
+
+                case "5":
+                    SignUpPatient();
+                    break;
+
+                case "6":
+                    Console.WriteLine("Exiting system. Goodbye!");
                     return;
 
                 default:
-                    Console.WriteLine("⚠️ Invalid selection. Try again.");
+                    Console.WriteLine("Invalid selection. Try again.");
+                    Console.ReadKey();
                     break;
             }
         }
+    }
+
+    static void SignUpPatient()
+    {
+        Console.Clear();
+        Console.WriteLine("=== PATIENT SIGN UP ===");
+
+        Console.Write("Full Name: ");
+        string name = Console.ReadLine()!;
+
+        Console.Write("Email: ");
+        string email = Console.ReadLine()!;
+
+        Console.Write("Password: ");
+        string password = Console.ReadLine()!;
+
+        var existing = HospitalData.Patients.FirstOrDefault(p => p.Email == email);
+        if (existing != null)
+        {
+            Console.WriteLine("❌ This email is already registered.");
+            Console.ReadKey();
+            return;
+        }
+
+        var patient = new Patient(name, email, password);
+        HospitalData.Patients.Add(patient);
+        FileStorage.SaveToFile("patients.json", HospitalData.Patients);
+
+        Console.WriteLine("✅ Patient account created successfully!");
+        Console.ReadKey();
     }
 }

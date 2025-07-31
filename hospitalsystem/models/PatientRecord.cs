@@ -9,6 +9,8 @@
         public string Prescription { get; set; }
         public DateTime VisitDate { get; set; }
 
+        public PatientRecord() { } // ✅ Needed for deserialization
+
         public PatientRecord(int id, string patientName, string doctorName, string diagnosis, string prescription, DateTime visitDate)
         {
             Id = id;

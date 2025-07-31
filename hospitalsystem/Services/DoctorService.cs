@@ -17,7 +17,7 @@ namespace hospitalsystem.services
         {
             while (true)
             {
-                Console.Clear();
+                
                 Console.WriteLine("╔════════════════════════════════════════════╗");
                 Console.WriteLine($"║       Welcome Dr. {_doctor.FullName,-25}  ║");
                 Console.WriteLine("╠════════════════════════════════════════════╣");
@@ -30,6 +30,8 @@ namespace hospitalsystem.services
                 Console.Write("Choose an option (1-5): ");
 
                 string? choice = Console.ReadLine();
+
+                Console.Clear();
 
                 switch (choice)
                 {
@@ -167,10 +169,16 @@ namespace hospitalsystem.services
 
                 FileStorage.SaveToFile("records.json", HospitalData.Records);
                 Console.WriteLine("Patient record saved successfully.");
+
+                Console.WriteLine("✅ Booking added and saved successfully.");
+                Console.WriteLine("Press any key to return to the menu...");
+                Console.ReadKey(); // ✅ Keeps the message visible
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Failed to write record: {ex.Message}");
+                Console.WriteLine($"❌ Failed to add booking: {ex.Message}");
+                Console.WriteLine("Press any key to return to the menu...");
+                Console.ReadKey(); // Also pause on error
             }
         }
     }

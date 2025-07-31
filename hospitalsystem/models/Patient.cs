@@ -4,14 +4,16 @@ namespace hospitalsystem.models
 {
     public class Patient : User
     {
-        public Patient() : base("", "") { }
+        public Patient() : base("", "", "") { }
 
-       // public Patient() : base("", "") { }
+
+        // public Patient() : base("", "") { }
         public Patient(string fullName, string email)
-            : base(fullName, email)
+       : base(fullName, email, "default123")  // ✅ Add dummy password
         {
             Role = "Patient";
         }
+
 
         public Patient(string fullName, string email, string password)
     : base(fullName, email, password)

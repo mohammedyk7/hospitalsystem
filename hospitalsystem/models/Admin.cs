@@ -2,7 +2,8 @@
 {
     public class Admin : User
     {
-     
+
+        public Admin() { }
 
         public Admin(string fullName, string email, string password)
     : base(fullName, email, password)
@@ -15,7 +16,7 @@
         {
             while (true)
             {
-                Console.Clear();
+                
                 Console.WriteLine("╔══════════════════════════════════════╗");
                 Console.WriteLine("║                ADMIN MENU            ║");
                 Console.WriteLine("╠══════════════════════════════════════╣");
@@ -26,6 +27,7 @@
                 Console.Write(" Enter your choice (1-3): ");
 
                 string choice = Console.ReadLine()!;
+                Console.Clear();
 
                 switch (choice)
                 {

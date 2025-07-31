@@ -6,42 +6,110 @@ namespace hospitalsystem.services
 {
     public static class branchService
     {
-        public static void SeedData()
+
+        public static void RunBranchService()
         {
-            // Branches
-            HospitalData.Branches.AddRange(new List<Branch>
+            while (true)
             {
-                new Branch(1, "Main Branch", "Muscat"),
-                new Branch(2, "North Branch", "Sohar")
-            });
+                Console.Clear();
+                Console.WriteLine("╔════════════════════════════════════════════╗");
+                Console.WriteLine("║              BRANCH SERVICE MENU           ║");
+                Console.WriteLine("╠════════════════════════════════════════════╣");
+                Console.WriteLine("║ 1. Create Branch                           ║");
+                Console.WriteLine("║ 2. View All Branches                       ║");
+                Console.WriteLine("║ 3. Update Branch                           ║");
+                Console.WriteLine("║ 4. Delete Branch                           ║");
+                Console.WriteLine("║ 5. Exit                                    ║");
+                Console.WriteLine("╚════════════════════════════════════════════╝");
+                Console.Write("Select an option (1-5): ");
+                string input = Console.ReadLine()!;
 
-            // Departments
-            HospitalData.Departments.AddRange(new List<Department>
-            {
-                new Department(1, "Cardiology"),
-                new Department(2, "Neurology")
-            });
-
-            // BranchDepartments
-            HospitalData.BranchDepartments.AddRange(new List<BranchDepartment>
-            {
-                new BranchDepartment(1, 1),
-                new BranchDepartment(2, 2)
-            });
-
-            // Clinics
-            HospitalData.Clinics.AddRange(new List<Clinic>
-            {
-                new Clinic(1, "Heart Clinic", 1),
-                new Clinic(2, "Brain Clinic", 2)
-            });
-
-            // Bookings
-            HospitalData.Bookings.AddRange(new List<Booking>
-            {
-                new Booking(1, "yusuf@patient.com", "ali@hospital.com", 1, DateTime.Now.AddDays(2)),
-                new Booking(2, "yusuf@patient.com", "ali@hospital.com", 2, DateTime.Now.AddDays(3))
-            });
+                switch (input)
+                {
+                    case "1": CreateBranch(); break;
+                    case "2": ViewAllBranches(); break;
+                    case "3": UpdateBranch(); break;
+                    case "4": DeleteBranch(); break;
+                    case "5": return;
+                    default:
+                        Console.WriteLine("⚠️ Invalid selection.");
+                        Console.ReadKey();
+                        break;
+                }
+            }
         }
+
+        private static void CreateBranch()
+        {
+            Console.Write("Enter Branch ID: ");
+            int id = int.Parse(Console.ReadLine()!);
+            Console.Write("Enter Branch Name: ");
+            string name = Console.ReadLine()!;
+            Console.Write("Enter Branch Location: ");
+            string location = Console.ReadLine()!;
+
+            var branch = new Branch(id, name, location);
+            HospitalData.Branches.Add(branch);
+            FileStorage.SaveToFile("branches.json", HospitalData.Branches);
+            Console.WriteLine("✅ Branch created.");
+            Console.ReadKey();
+        }
+
+        private static void ViewAllBranches()
+        {
+            if (HospitalData.Branches.Count == 0)
+            {
+                Console.WriteLine("❌ No branches found.");
+            }
+            else
+            {
+                foreach (var b in HospitalData.Branches)
+                    b.Display();
+            }
+            Console.ReadKey();
+        }
+
+        private static void UpdateBranch()
+        {
+            Console.Write("Enter Branch ID to update: ");
+            int id = int.Parse(Console.ReadLine()!);
+            var branch = HospitalData.Branches.FirstOrDefault(b => b.Id == id);
+
+            if (branch == null)
+            {
+                Console.WriteLine("❌ Branch not found.");
+            }
+            else
+            {
+                Console.Write("New Name: ");
+                branch.Name = Console.ReadLine()!;
+                Console.Write("New Location: ");
+                branch.Location = Console.ReadLine()!;
+                FileStorage.SaveToFile("branches.json", HospitalData.Branches);
+                Console.WriteLine("✅ Branch updated.");
+            }
+            Console.ReadKey();
+        }
+
+        private static void DeleteBranch()
+        {
+            Console.Write("Enter Branch ID to delete: ");
+            int id = int.Parse(Console.ReadLine()!);
+            var branch = HospitalData.Branches.FirstOrDefault(b => b.Id == id);
+
+            if (branch == null)
+            {
+                Console.WriteLine("❌ Branch not found.");
+            }
+            else
+            {
+                HospitalData.Branches.Remove(branch);
+                FileStorage.SaveToFile("branches.json", HospitalData.Branches);
+                Console.WriteLine("✅ Branch deleted.");
+            }
+            Console.ReadKey();
+        }
+
+
     }
 }

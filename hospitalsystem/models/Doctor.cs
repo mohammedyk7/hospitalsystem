@@ -6,31 +6,26 @@
 
 
         public Doctor() { }
-        // ✅ Parameterless constructor for JSON deserialization
-        //public Doctor() : base()
-        //{
-        //    Role = "Doctor";
-        //}
+       
 
         public Doctor(string fullName, string email)
-            : base(fullName, email)
+     : base(fullName, email, "default123") // or actual password
         {
             Role = "Doctor";
         }
 
-        public Doctor(string fullName, string email, int clinicId)
-            : base(fullName, email)
-        {
-            Role = "Doctor";
-            ClinicId = clinicId;
-        }
+
+      
 
         public Doctor(string fullName, string email, string password, int clinicId)
-            : base(fullName, email, password)
+    : base(fullName, email, password)
         {
-            ClinicId = clinicId;
             Role = "Doctor";
+            ClinicId = clinicId;
         }
+
+
+      
 
         public override void DisplayMenu()
         {
@@ -120,7 +115,7 @@
             Console.Write("Enter Clinic ID: ");
             int clinicId = int.Parse(Console.ReadLine()!);
 
-            var doctor = new Doctor(name, email, clinicId);
+            var doctor = new Doctor(name, email, "123", clinicId); // ✅ Example default password
             HospitalData.Doctors.Add(doctor);
             FileStorage.SaveToFile("doctors.json", HospitalData.Doctors);
 

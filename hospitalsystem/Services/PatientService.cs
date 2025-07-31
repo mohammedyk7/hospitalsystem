@@ -22,9 +22,10 @@ namespace hospitalsystem.services
                 Console.WriteLine("╠════════════════════════════════════════════╣");
                 Console.WriteLine("║ 1. View My Bookings                        ║");
                 Console.WriteLine("║ 2. View My Records                         ║");
-                Console.WriteLine("║ 3. Exit                                    ║");
+                Console.WriteLine("║ 3. Book Appointment                        ║");
+                Console.WriteLine("║ 4. Exit                                    ║");
                 Console.WriteLine("╚════════════════════════════════════════════╝");
-                Console.Write("Choose an option (1-3): ");
+                Console.Write("Choose an option (1-4): ");
 
                 string? choice = Console.ReadLine();
 
@@ -33,11 +34,18 @@ namespace hospitalsystem.services
                     case "1":
                         ViewMyBookings();
                         break;
+
                     case "2":
                         ViewMyRecords();
                         break;
+
                     case "3":
+                        BookAppointment();
+                        break;
+
+                    case "4":
                         return;
+
                     default:
                         Console.WriteLine("Invalid choice. Try again.");
                         Console.ReadKey();
@@ -46,27 +54,58 @@ namespace hospitalsystem.services
             }
         }
 
-        private void ViewMyBookings()
+        public void BookAppointment()
         {
+            Console.Clear();
+            Console.WriteLine("=== Book Appointment ===");
+
+            Console.Write("Enter Booking ID: ");
+            int bookingId = int.Parse(Console.ReadLine()!);
+
+            Console.Write("Enter Clinic ID: ");
+            int clinicId = int.Parse(Console.ReadLine()!);
+
+            Console.Write("Enter Doctor Email: ");
+            string doctorEmail = Console.ReadLine()!;
+
+            Console.Write("Enter Appointment Date (yyyy-MM-dd): ");
+            DateTime date = DateTime.Parse(Console.ReadLine()!);
+
+            var booking = new Booking(bookingId, _patient.Email, doctorEmail, clinicId, date);
+            HospitalData.Bookings.Add(booking);
+            FileStorage.SaveToFile("bookings.json", HospitalData.Bookings);
+
+            Console.WriteLine("✅ Appointment booked successfully!");
+            Console.ReadKey();
+        }
+
+        public void ViewMyBookings()
+        {
+            Console.Clear();
+            Console.WriteLine("=== Your Bookings ===");
+
             var myBookings = HospitalData.Bookings
-                .Where(b => b.PatientEmail == _patient.Email)
+                .Where(b => b.PatientEmail.Equals(_patient.Email, StringComparison.OrdinalIgnoreCase))
                 .ToList();
 
             if (!myBookings.Any())
             {
                 Console.WriteLine("No bookings found.");
-                Console.ReadKey();
-                return;
             }
-
-            foreach (var booking in myBookings)
-                booking.Display();
+            else
+            {
+                foreach (var booking in myBookings)
+                    booking.Display();
+            }
 
             Console.ReadKey();
         }
 
-        private void ViewMyRecords()
+        public void ViewMyRecords()
         {
+            Console.Clear();
+            Console.WriteLine("=== Your Medical Records ===");
+
             var myRecords = HospitalData.Records
                 .Where(r => r.PatientName.Equals(_patient.FullName, StringComparison.OrdinalIgnoreCase))
                 .ToList();
@@ -74,12 +113,12 @@ namespace hospitalsystem.services
             if (!myRecords.Any())
             {
                 Console.WriteLine("No records found.");
-                Console.ReadKey();
-                return;
             }
-
-            foreach (var record in myRecords)
-                record.Display();
+            else
+            {
+                foreach (var record in myRecords)
+                    record.Display();
+            }
 
             Console.ReadKey();
         }

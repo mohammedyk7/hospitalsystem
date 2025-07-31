@@ -11,11 +11,11 @@ namespace hospitalsystem.services
             _admin = admin;
         }
 
-        public void DisplayAdminMenu()
+        public void DisplayAdminMenu()//
         {
             while (true)
             {
-                Console.Clear();
+                
                 Console.WriteLine("╔════════════════════════════════════════════╗");
                 Console.WriteLine($"║      Welcome, Admin {_admin.FullName,-25} ║");
                 Console.WriteLine("╠════════════════════════════════════════════╣");
@@ -28,6 +28,7 @@ namespace hospitalsystem.services
                 Console.Write(" Choose an option (1-5): ");
 
                 string? choice = Console.ReadLine();
+                Console.Clear();
 
                 switch (choice)
                 {
@@ -52,33 +53,52 @@ namespace hospitalsystem.services
             }
         }
 
-        private void AddClinic()
+       
+
+        public void AddClinic()
         {
-            try
+            Console.Write("Enter Clinic ID: ");
+            int id = int.Parse(Console.ReadLine()!);
+            if (HospitalData.Clinics.Any(c => c.Id == id))
             {
-                Console.Write("Enter Clinic ID: ");
-                int id = int.Parse(Console.ReadLine());
+                Console.WriteLine("❌ Clinic ID already exists.");
+                Console.ReadKey();
+                return;
+            }
 
-                Console.Write("Enter Clinic Name: ");
-                string name = Console.ReadLine();
+            Console.Write("Enter Clinic Name: ");
+            string name = Console.ReadLine()!;
+            if (HospitalData.Clinics.Any(c => c.Name.Equals(name, StringComparison.OrdinalIgnoreCase)))
+            {
+                Console.WriteLine("❌ Clinic name already exists.");
+                Console.ReadKey();
+                return;
+            }
 
-                Console.Write("Enter Department ID: ");
-                int departmentId = int.Parse(Console.ReadLine());
-
+            //Console.Write("Enter Clinic Location: ");
+            Console.Write("Enter Branch ID: ");
+            int branchId;
+            while (true)
+            {
                 Console.Write("Enter Branch ID: ");
-                int branchId = int.Parse(Console.ReadLine());
+                string? input = Console.ReadLine();
 
-                var clinic = new Clinic(id, name, departmentId, branchId);
-                HospitalData.Clinics.Add(clinic);
+                if (int.TryParse(input, out branchId))
+                    break;
 
-                FileStorage.SaveToFile("clinics.json", HospitalData.Clinics);
-                Console.WriteLine("Clinic added successfully.");
+                Console.WriteLine("❌ Invalid input. Please enter a valid number.");
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error adding clinic: {ex.Message}");
-            }
+
+
+            var clinic = new Clinic(id, name, branchId); // ✅ passes int
+
+            HospitalData.Clinics.Add(clinic);
+            FileStorage.SaveToFile("clinics.json", HospitalData.Clinics);
+
+            Console.WriteLine("✅ Clinic created successfully.");
+            Console.ReadKey();
         }
+
 
         private void ViewAllClinics()
         {

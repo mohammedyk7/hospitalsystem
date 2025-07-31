@@ -6,6 +6,8 @@
         public string Name { get; set; }
         public string Location { get; set; }
 
+        public Branch() { }
+
         public Branch(int id, string name, string location)
         {
             Id = id;
