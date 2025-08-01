@@ -4,7 +4,7 @@ namespace hospitalsystem.services
 {
     public class ClinicService : IClinicService
     {
-        public void DisplayClinicMenu()
+        public void DisplayClinicMenu()// This method displays the clinic management menu and handles user input
         {
             while (true)
             {
@@ -25,7 +25,7 @@ namespace hospitalsystem.services
                 switch (choice)
                 {
                     case "1":
-                        AddClinic();
+                        AddClinic();// This method allows the user to add a new clinic
                         break;
                     case "2":
                         ViewClinics();
