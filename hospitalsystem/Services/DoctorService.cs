@@ -233,7 +233,7 @@ namespace hospitalsystem.services
 
             if (!matchedDoctors.Any())// If no doctors match the search criteria, show a message
             {
-                Console.WriteLine(" No matching doctors found.");
+                Console.WriteLine(" No matching doctors found.");// Show a message if no doctors match the search criteria
             }
             else
             {
@@ -249,7 +249,7 @@ namespace hospitalsystem.services
             Console.ReadKey();
         }
 
-        public static void CheckDoctorAvailability()
+        public static void CheckDoctorAvailability()// This method allows the user to check a doctor's availability by their email
         {
             Console.Write("Enter Doctor Email: ");
             string email = Console.ReadLine()!.Trim().ToLower();
