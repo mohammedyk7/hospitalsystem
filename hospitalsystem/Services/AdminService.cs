@@ -302,7 +302,7 @@ namespace hospitalsystem.services
                 return;
             }
 
-            var booking = HospitalData.Bookings.FirstOrDefault(b => b.Id == bookingId && !b.IsCancelled);
+            var booking = HospitalData.Bookings.FirstOrDefault(b => b.Id == bookingId && !b.IsCancelled);// Check if booking exists and is not already cancelled
             if (booking == null)
             {
                 Console.WriteLine("❌ Booking not found or already cancelled.");
