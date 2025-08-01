@@ -107,7 +107,7 @@ namespace hospitalsystem.services
                 var clinic = HospitalData.Clinics.FirstOrDefault(c => c.Id == id);// This searches for the clinic with the specified ID
                 if (clinic == null)
                 {
-                    Console.WriteLine("❌ Clinic not found.");
+                    Console.WriteLine(" Clinic not found.");
                     Console.ReadKey();
                 }
                 else// If the clinic is found, it prompts the user to enter new details
@@ -122,13 +122,13 @@ namespace hospitalsystem.services
                     clinic.BranchId = int.Parse(Console.ReadLine());
 
                     FileStorage.SaveToFile("clinics.json", HospitalData.Clinics);
-                    Console.WriteLine("✅ Clinic updated successfully.");
+                    Console.WriteLine(" Clinic updated successfully.");
                     Console.ReadKey();
                 }
             }
             else
             {
-                Console.WriteLine("❌ Invalid Clinic ID.");
+                Console.WriteLine("s Invalid Clinic ID.");
                 Console.ReadKey();
             }
 
