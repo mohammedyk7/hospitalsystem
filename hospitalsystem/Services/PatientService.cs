@@ -105,7 +105,7 @@ namespace hospitalsystem.services
             Console.WriteLine("=== Your Bookings ===");
 
             var myBookings = HospitalData.Bookings
-                .Where(b => b.PatientEmail.Equals(_patient.Email, StringComparison.OrdinalIgnoreCase))
+                .Where(b => b.PatientEmail.Equals(_patient.Email, StringComparison.OrdinalIgnoreCase))// Filter bookings by the patient's email
                 .ToList();
 
             if (!myBookings.Any())
