@@ -25,7 +25,7 @@ namespace hospitalsystem.services
 
 
 
-        public static void ManageDoctor()
+        public static void ManageDoctor()// This method displays the doctor management menu and handles user input
         {
             while (true)
             {
@@ -49,30 +49,30 @@ namespace hospitalsystem.services
                 switch (choice)
                 {
                     case "1":
-                        CreateDoctor();
+                        CreateDoctor();// This method allows the user to create a new doctor
                         break;
                     case "2":
-                        ViewAllDoctors();
+                        ViewAllDoctors();// This method displays all doctors in the system
                         break;
                     case "3":
-                        DeleteDoctor();
+                        DeleteDoctor();// This method allows the user to delete a doctor by their email
                         break;
                     case "4":
-                        AssignDoctorToClinic();
+                        AssignDoctorToClinic();// This method allows the user to assign a doctor to a clinic by their email
                         break;
                     case "5":
-                        SearchDoctor();
+                        SearchDoctor();// This method allows the user to search for a doctor by name or email
                         break;
                     case "6":
-                        CheckDoctorAvailability();
+                        CheckDoctorAvailability();// This method allows the user to check a doctor's availability by their email
                         break;
                     case "7":
-                        ToggleDoctorAvailability();
+                        ToggleDoctorAvailability();// This method allows the user to toggle a doctor's availability by their email
                         break;
                     case "8":
                         return;
                     default:
-                        Console.WriteLine("❌ Invalid option. Try again.");
+                        Console.WriteLine(" Invalid option. Try again.");
                         Console.ReadKey();
                         break;
                 }
