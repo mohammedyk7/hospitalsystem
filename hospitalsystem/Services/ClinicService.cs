@@ -50,9 +50,9 @@ namespace hospitalsystem.services
         }
 
 
-        private void AddClinic()
+        private void AddClinic()// This method allows the user to add a new clinic
         {
-            try
+            try// This try block is used to catch any exceptions that may occur during the clinic addition process
             {
                 Console.Write("Enter Clinic ID: ");
                 int id = int.Parse(Console.ReadLine());
