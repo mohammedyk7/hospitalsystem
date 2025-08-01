@@ -130,7 +130,7 @@ namespace hospitalsystem.services
                 .Where(r => r.PatientName.Equals(_patient.FullName, StringComparison.OrdinalIgnoreCase))// Filter records by the patient's name
                 .ToList();
 
-            if (!myRecords.Any())
+            if (!myRecords.Any())// Check if there are any records for the patient
             {
                 Console.WriteLine("No records found.");
             }
