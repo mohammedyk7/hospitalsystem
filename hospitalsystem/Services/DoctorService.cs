@@ -104,7 +104,7 @@ namespace hospitalsystem.services
                 Console.WriteLine(" Invalid Clinic ID. Please enter a valid number.");
             }
 
-            // ✅ Check for duplicate doctor
+            // Check for duplicate doctor
             if (HospitalData.Doctors.Any(d =>
                 d.FullName.Equals(name, StringComparison.OrdinalIgnoreCase) ||
                 d.Email.Equals(email, StringComparison.OrdinalIgnoreCase)))
