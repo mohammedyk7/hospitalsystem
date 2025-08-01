@@ -93,13 +93,13 @@ namespace hospitalsystem.services
             Console.WriteLine("\nList of Clinics:");// This prints a header for the clinic list
             foreach (var clinic in HospitalData.Clinics)// This iterates through each clinic in the list
             {
-                Console.WriteLine($"ID: {clinic.Id}, Name: {clinic.Name}, Dept ID: {clinic.DepartmentId}, Branch ID: {clinic.BranchId}");
+                Console.WriteLine($"ID: {clinic.Id}, Name: {clinic.Name}, Dept ID: {clinic.DepartmentId}, Branch ID: {clinic.BranchId}");// This prints the details of each clinic
             }
             Console.ReadKey();
         }
 
 
-        public void UpdateClinic()
+        public void UpdateClinic()// This method allows the user to update an existing clinic
         {
             Console.Write("Enter Clinic ID to update: ");
             if (int.TryParse(Console.ReadLine(), out int id))
