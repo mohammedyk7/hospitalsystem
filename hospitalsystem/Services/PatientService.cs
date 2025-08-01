@@ -161,7 +161,7 @@ namespace hospitalsystem.services
 
             Console.Write("Enter cancellation reason: ");
             booking.CancellationReason = Console.ReadLine();
-            booking.IsCancelled = true;
+            booking.IsCancelled = true;// Mark the booking as cancelled
             FileStorage.SaveToFile("bookings.json", HospitalData.Bookings);
             Console.WriteLine("✅ Booking cancelled successfully.");
             Console.ReadKey();
