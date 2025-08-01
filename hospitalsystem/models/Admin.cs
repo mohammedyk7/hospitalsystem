@@ -11,6 +11,7 @@
             Role = "Admin";
         }
 
+        public string Id { get; set; } = Guid.NewGuid().ToString();
 
         public override void DisplayMenu()
         {
@@ -35,9 +36,18 @@
                         AssignDoctorToClinic();
                         break;
                     case "2":
-                        foreach (var doc in HospitalData.Doctors)
-                            Console.WriteLine($"{doc.FullName} (Clinic ID: {doc.ClinicId})");
+                        if (HospitalData.Doctors.Count == 0)
+                        {
+                            Console.WriteLine("No doctors found.");
+                        }
+                        else
+                        {
+                            foreach (var doc in HospitalData.Doctors)
+                                Console.WriteLine($"👨‍⚕️ {doc.FullName} - Email: {doc.Email}, Clinic ID: {doc.ClinicId}");
+                        }
+                        Console.ReadKey();
                         break;
+
                     case "3":
                         return;
                     default:
@@ -47,22 +57,33 @@
             }
         }
 
+       
+
         public void AssignDoctorToClinic()
         {
-            Console.Write("Enter Doctor's Name: ");
-            string doctorName = Console.ReadLine()!;
+            Console.Write("Enter Doctor Email: ");
+            string email = Console.ReadLine()!;
 
-            Console.Write("Enter Clinic ID: ");
-            int clinicId = int.Parse(Console.ReadLine()!);
+            var doctor = HospitalData.Doctors.FirstOrDefault(d => d.Email.Equals(email, StringComparison.OrdinalIgnoreCase));
 
-            var doctor = new Doctor(doctorName, doctorName.ToLower() + "@hospital.com");
-            doctor.ClinicId = clinicId;
+            if (doctor == null)
+            {
+                Console.WriteLine("❌ Doctor not found.");
+            }
+            else
+            {
+                Console.Write("Enter New Clinic ID: ");
+                int clinicId = int.Parse(Console.ReadLine()!);
 
-            HospitalData.Doctors.Add(doctor);
-            FileStorage.SaveToFile("doctors.json", HospitalData.Doctors);
+                doctor.ClinicId = clinicId;
+                FileStorage.SaveToFile("doctors.json", HospitalData.Doctors);
 
-            Console.WriteLine($"Doctor {doctor.FullName} assigned to Clinic {clinicId} successfully.\n");
+                Console.WriteLine($"✅ Doctor {doctor.FullName} assigned to Clinic {clinicId}.");
+            }
+
+            Console.ReadKey();
         }
+
 
     }
 }

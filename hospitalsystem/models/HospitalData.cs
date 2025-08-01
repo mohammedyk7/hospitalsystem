@@ -9,6 +9,10 @@
         public static List<Booking> Bookings { get; set; } = new();
         public static List<PatientRecord> Records { get; set; } = new();
         public static List<Doctor> Doctors { get; set; } = new();
+        public static List<Admin> Admins { get; set; } = new List<Admin>();
+
+        public static List<DoctorAvailability> Availabilities = new();
+
 
         // ✅ Make sure patient is included in login list
         public static List<Patient> Patients { get; set; } = new()

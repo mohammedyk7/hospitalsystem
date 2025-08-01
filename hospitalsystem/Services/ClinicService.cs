@@ -2,7 +2,7 @@
 using hospitalsystem.Interface;
 namespace hospitalsystem.services
 {
-    public class ClinicService: IClinicService
+    public class ClinicService : IClinicService
     {
         public void DisplayClinicMenu()
         {
@@ -14,12 +14,12 @@ namespace hospitalsystem.services
                 Console.WriteLine("╠══════════════════════════════════════╣");
                 Console.WriteLine("║ 1. Add Clinic                        ║");
                 Console.WriteLine("║ 2. View All Clinics                  ║");
-                Console.WriteLine("║ 3. Exit                              ║");
+                Console.WriteLine("║ 3. Update Clinic                     ║");
+                Console.WriteLine("║ 4. Delete Clinic                     ║");
+                Console.WriteLine("║ 5. Search Clinic by ID               ║");
+                Console.WriteLine("║ 6. Exit                              ║");
                 Console.WriteLine("╚══════════════════════════════════════╝");
-                Console.Write("Choose an option (1-3): ");
-
-
-                Console.Write("Choose an option: ");
+                Console.Write("Choose an option (1-6): ");
                 string? choice = Console.ReadLine();
 
                 switch (choice)
@@ -31,13 +31,24 @@ namespace hospitalsystem.services
                         ViewClinics();
                         break;
                     case "3":
+                        UpdateClinic();
+                        break;
+                    case "4":
+                        DeleteClinic();
+                        break;
+                    case "5":
+                        SearchClinicById();
+                        break;
+                    case "6":
                         return;
                     default:
-                        Console.WriteLine("Invalid option. Try again.");
+                        Console.WriteLine("Invalid option. Press any key...");
+                        Console.ReadKey();
                         break;
                 }
             }
         }
+
 
         private void AddClinic()
         {
@@ -61,18 +72,21 @@ namespace hospitalsystem.services
                 FileStorage.SaveToFile("clinics.json", HospitalData.Clinics);
 
                 Console.WriteLine("✅ Clinic added and saved successfully.");
+                Console.ReadKey();
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"❌ Failed to add clinic: {ex.Message}");
+                Console.ReadKey();
             }
         }
 
-        private void ViewClinics()
+        public void ViewClinics()
         {
             if (!HospitalData.Clinics.Any())
             {
                 Console.WriteLine("No clinics found.");
+                Console.ReadKey();
                 return;
             }
 
@@ -81,6 +95,106 @@ namespace hospitalsystem.services
             {
                 Console.WriteLine($"ID: {clinic.Id}, Name: {clinic.Name}, Dept ID: {clinic.DepartmentId}, Branch ID: {clinic.BranchId}");
             }
+            Console.ReadKey();
         }
+
+
+        public void UpdateClinic()
+        {
+            Console.Write("Enter Clinic ID to update: ");
+            if (int.TryParse(Console.ReadLine(), out int id))
+            {
+                var clinic = HospitalData.Clinics.FirstOrDefault(c => c.Id == id);
+                if (clinic == null)
+                {
+                    Console.WriteLine("❌ Clinic not found.");
+                    Console.ReadKey();
+                }
+                else
+                {
+                    Console.Write("Enter new name: ");
+                    clinic.Name = Console.ReadLine();
+
+                    Console.Write("Enter new Department ID: ");
+                    clinic.DepartmentId = int.Parse(Console.ReadLine());
+
+                    Console.Write("Enter new Branch ID: ");
+                    clinic.BranchId = int.Parse(Console.ReadLine());
+
+                    FileStorage.SaveToFile("clinics.json", HospitalData.Clinics);
+                    Console.WriteLine("✅ Clinic updated successfully.");
+                    Console.ReadKey();
+                }
+            }
+            else
+            {
+                Console.WriteLine("❌ Invalid Clinic ID.");
+                Console.ReadKey();
+            }
+
+            Console.WriteLine("Press any key to return...");
+            Console.ReadKey();
+        }
+
+
+
+
+        public void DeleteClinic()
+        {
+            Console.Write("Enter Clinic ID to delete: ");
+            if (int.TryParse(Console.ReadLine(), out int id))
+            {
+                var clinic = HospitalData.Clinics.FirstOrDefault(c => c.Id == id);
+                if (clinic == null)
+                {
+                    Console.WriteLine("❌ Clinic not found.");
+                    Console.ReadKey();
+                }
+                else
+                {
+                    HospitalData.Clinics.Remove(clinic);
+                    FileStorage.SaveToFile("clinics.json", HospitalData.Clinics);
+                    Console.WriteLine("✅ Clinic deleted.");
+                    Console.ReadKey();
+                }
+            }
+            else
+            {
+                Console.WriteLine("❌ Invalid Clinic ID.");
+                Console.ReadKey();
+            }
+
+            Console.WriteLine("Press any key to return...");
+            Console.ReadKey();
+        }
+
+        public void SearchClinicById()
+        {
+            Console.Write("Enter Clinic ID to search: ");
+            if (int.TryParse(Console.ReadLine(), out int id))
+            {
+                var clinic = HospitalData.Clinics.FirstOrDefault(c => c.Id == id);
+                if (clinic == null)
+                {
+                    Console.WriteLine("❌ Clinic not found.");
+                    Console.ReadKey();
+                }
+                else
+                {
+                    Console.WriteLine($"🔍 Found Clinic:");
+                    Console.WriteLine($"ID: {clinic.Id}, Name: {clinic.Name}, Dept ID: {clinic.DepartmentId}, Branch ID: {clinic.BranchId}");
+                    Console.ReadKey();
+                }
+            }
+            else
+            {
+                Console.WriteLine("❌ Invalid input.");
+                Console.ReadKey();
+            }
+
+            Console.WriteLine("Press any key to return...");
+            Console.ReadKey();
+        }
+
     }
 }

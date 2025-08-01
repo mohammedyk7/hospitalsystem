@@ -5,181 +5,277 @@ namespace hospitalsystem.services
 {
     public class DoctorService : IDoctorService
     {
-        private Doctor _doctor;
+        public Doctor _doctor;
 
         public DoctorService(Doctor doctor)
         {
             _doctor = doctor;
         }
 
-        // ✅ Implements DisplayDoctorMenu
+
+
+
         public void DisplayDoctorMenu()
+        {
+            // your doctor menu logic here
+            Console.WriteLine($"👨‍⚕️ Welcome Dr. {_doctor.FullName}");
+        }
+
+
+
+
+
+        public static void ManageDoctor()
         {
             while (true)
             {
-                
-                Console.WriteLine("╔════════════════════════════════════════════╗");
-                Console.WriteLine($"║       Welcome Dr. {_doctor.FullName,-25}  ║");
-                Console.WriteLine("╠════════════════════════════════════════════╣");
-                Console.WriteLine("║ 1. View My Bookings                        ║");
-                Console.WriteLine("║ 2. Add Booking                             ║");
-                Console.WriteLine("║ 3. View My Patient Records                 ║");
-                Console.WriteLine("║ 4. Write Patient Record                    ║");
-                Console.WriteLine("║ 5. Exit                                    ║");
-                Console.WriteLine("╚════════════════════════════════════════════╝");
-                Console.Write("Choose an option (1-5): ");
-
-                string? choice = Console.ReadLine();
-
                 Console.Clear();
+                Console.WriteLine("╔══════════════════════════════════════════════╗");
+                Console.WriteLine("║           DOCTOR MANAGEMENT MODULE           ║");
+                Console.WriteLine("╠══════════════════════════════════════════════╣");
+                Console.WriteLine("║ 1. Create Doctor                             ║");
+                Console.WriteLine("║ 2. View All Doctors                          ║");
+                Console.WriteLine("║ 3. Delete Doctor                             ║");
+                Console.WriteLine("║ 4. Assign Doctor to Clinic                   ║");
+                Console.WriteLine("║ 5. Search Doctor                             ║");
+                Console.WriteLine("║ 6. Check Doctor Availability                 ║");
+                Console.WriteLine("║ 7. Toggle Doctor Availability                ║");
+                Console.WriteLine("║ 8. Back                                      ║");
+                Console.WriteLine("╚══════════════════════════════════════════════╝");
+                Console.Write("Enter your choice (1-8): ");
+
+                string choice = Console.ReadLine();
 
                 switch (choice)
                 {
                     case "1":
-                        ViewMyBookings();
+                        CreateDoctor();
                         break;
                     case "2":
-                        AddBooking();
+                        ViewAllDoctors();
                         break;
                     case "3":
-                        ViewMyPatientRecords();
+                        DeleteDoctor();
                         break;
                     case "4":
-                        WritePatientRecord();
+                        AssignDoctorToClinic();
                         break;
                     case "5":
+                        SearchDoctor();
+                        break;
+                    case "6":
+                        CheckDoctorAvailability();
+                        break;
+                    case "7":
+                        ToggleDoctorAvailability();
+                        break;
+                    case "8":
                         return;
                     default:
-                        Console.WriteLine("Invalid choice. Try again.");
+                        Console.WriteLine("❌ Invalid option. Try again.");
+                        Console.ReadKey();
                         break;
                 }
             }
         }
 
-        // ✅ Implements AddDoctor
-        public void AddDoctor(Doctor doctor)
+
+
+        public static void CreateDoctor()
         {
+            Console.Write("Enter Doctor Name: ");
+            string name = Console.ReadLine()!.Trim();
+
+            Console.Write("Enter Doctor Email: ");
+            string email = Console.ReadLine()!.Trim();
+
+            Console.Write("Enter Password: ");
+            string password = Console.ReadLine()!;
+
+            // Validate clinic ID input
+            int clinicId;
+            while (true)
+            {
+                Console.Write("Enter Clinic ID: ");
+                string? input = Console.ReadLine();
+                if (int.TryParse(input, out clinicId))
+                    break;
+
+                Console.WriteLine("❌ Invalid Clinic ID. Please enter a valid number.");
+            }
+
+            // ✅ Check for duplicate doctor
+            if (HospitalData.Doctors.Any(d =>
+                d.FullName.Equals(name, StringComparison.OrdinalIgnoreCase) ||
+                d.Email.Equals(email, StringComparison.OrdinalIgnoreCase)))
+            {
+                Console.WriteLine("❌ A doctor with this name or email already exists.");
+                Console.ReadKey();
+                return;
+            }
+
+            var doctor = new Doctor(name, email, password, clinicId);
             HospitalData.Doctors.Add(doctor);
             FileStorage.SaveToFile("doctors.json", HospitalData.Doctors);
+            Console.WriteLine("✅ Doctor added successfully.");
+            Console.ReadKey();
         }
 
-        // ✅ Implements GetAllDoctors
-        public List<Doctor> GetAllDoctors()
+
+
+
+
+        public static void ViewAllDoctors()
         {
-            return HospitalData.Doctors;
+            Console.Clear();
+            Console.WriteLine("╔══════════════════════════════════════════════════════════════════╗");
+            Console.WriteLine("║                          LIST OF DOCTORS                         ║");
+            Console.WriteLine("╠══════════════════════════════════════════════════════════════════╣");
+
+            if (HospitalData.Doctors.Count == 0)
+            {
+                Console.WriteLine("║                     ❌ No doctors found.                        ║");
+            }
+            else
+            {
+                foreach (var doc in HospitalData.Doctors)
+                {
+                    Console.WriteLine($"║ Name     : {doc.FullName,-20} Email: {doc.Email,-25} ║");
+                    Console.WriteLine($"║ ClinicID : {doc.ClinicId,-10} Available: {(doc.IsAvailable ? "✅ Yes" : "❌ No"),-10}               ║");
+                    Console.WriteLine("╠──────────────────────────────────────────────────────────────────╣");
+                }
+            }
+
+            Console.WriteLine("╚══════════════════════════════════════════════════════════════════╝");
+            Console.WriteLine("\nPress any key to return...");
+            Console.ReadKey();
         }
 
-        // ✅ Implements GetDoctorByEmail
-        public Doctor? GetDoctorByEmail(string email)
+
+        public static void ToggleDoctorAvailability()
         {
-            return HospitalData.Doctors.FirstOrDefault(d => d.Email == email);
+            Console.Write("Enter Doctor Email to change availability: ");
+            string email = Console.ReadLine()!.Trim().ToLower();
+
+            var doctor = HospitalData.Doctors.FirstOrDefault(d =>
+                d.Email.ToLower() == email);
+
+            if (doctor == null)
+            {
+                Console.WriteLine("❌ Doctor not found.");
+            }
+            else
+            {
+                doctor.IsAvailable = !doctor.IsAvailable;
+                FileStorage.SaveToFile("doctors.json", HospitalData.Doctors);
+                Console.WriteLine($"✅ Availability updated to: {(doctor.IsAvailable ? "Available" : "Not Available")}");
+            }
+
+            Console.WriteLine("\nPress any key to return...");
+            Console.ReadKey();
         }
 
-        // ✅ Implements Authenticate
-        public bool Authenticate(string email, string password)
+
+
+        public static void DeleteDoctor()
         {
-            return HospitalData.Doctors.Any(d => d.Email == email && d.Password == password);
+            Console.Write("Enter Doctor Email to delete: ");
+            string email = Console.ReadLine()!;
+
+            var doctor = HospitalData.Doctors.FirstOrDefault(d => d.Email.Equals(email, StringComparison.OrdinalIgnoreCase));
+            if (doctor == null)
+            {
+                Console.WriteLine("Doctor not found.");
+            }
+            else
+            {
+                HospitalData.Doctors.Remove(doctor);
+                FileStorage.SaveToFile("doctors.json", HospitalData.Doctors);
+                Console.WriteLine("Doctor deleted successfully.");
+            }
+            Console.ReadKey();
         }
 
-        private void ViewMyBookings()
+        public static void AssignDoctorToClinic()
         {
-            var myBookings = HospitalData.Bookings
-                .Where(b => b.DoctorEmail == _doctor.Email)
+            Console.Write("Enter Doctor Email: ");
+            string email = Console.ReadLine()!;
+
+            var doctor = HospitalData.Doctors.FirstOrDefault(d => d.Email.Equals(email, StringComparison.OrdinalIgnoreCase));
+            if (doctor == null)
+            {
+                Console.WriteLine("Doctor not found.");
+            }
+            else
+            {
+                Console.Write("Enter new Clinic ID: ");
+                int newClinicId = int.Parse(Console.ReadLine()!);
+                doctor.ClinicId = newClinicId;
+                FileStorage.SaveToFile("doctors.json", HospitalData.Doctors);
+                Console.WriteLine("Doctor assigned to new clinic.");
+            }
+            Console.ReadKey();
+        }
+
+        public static void SearchDoctor()
+        {
+            Console.Clear();
+            Console.WriteLine("╔══════════════════════════════════════╗");
+            Console.WriteLine("║           SEARCH FOR DOCTOR          ║");
+            Console.WriteLine("╚══════════════════════════════════════╝");
+
+            Console.Write("🔍 Enter Doctor Name or Email to search: ");
+            string query = Console.ReadLine()!.Trim().ToLower();
+
+            var matchedDoctors = HospitalData.Doctors
+                .Where(d => d.FullName.ToLower().Contains(query) || d.Email.ToLower().Contains(query))
                 .ToList();
 
-            if (!myBookings.Any())
+            if (!matchedDoctors.Any())
             {
-                Console.WriteLine("No bookings found for you.");
-                return;
+                Console.WriteLine("❌ No matching doctors found.");
+            }
+            else
+            {
+                Console.WriteLine("\n✅ Matching Doctors:");
+                foreach (var doc in matchedDoctors)
+                {
+                    doc.Display();
+                    Console.WriteLine("--------------------------------------------------");
+                }
             }
 
-            foreach (var booking in myBookings)
-                booking.Display();
+            Console.WriteLine("\nPress any key to return...");
+            Console.ReadKey();
         }
 
-        private void AddBooking()
+        public static void CheckDoctorAvailability()
         {
-            try
+            Console.Write("Enter Doctor Email: ");
+            string email = Console.ReadLine()!.Trim().ToLower();
+
+            var doctor = HospitalData.Doctors.FirstOrDefault(d =>
+                d.Email.ToLower() == email);
+
+            if (doctor == null)
             {
-                Console.Write("Enter Patient Email: ");
-                string patientEmail = Console.ReadLine();
-
-                Console.Write("Enter Clinic ID: ");
-                int clinicId = int.Parse(Console.ReadLine());
-
-                Console.Write("Enter Appointment Date (yyyy-MM-dd HH:mm): ");
-                DateTime appointmentDate = DateTime.Parse(Console.ReadLine());
-
-                int newId = HospitalData.Bookings.Count + 1;
-
-                var booking = new Booking(
-                    newId,
-                    patientEmail,
-                    _doctor.Email,
-                    clinicId,
-                    appointmentDate
-                );
-
-                HospitalData.Bookings.Add(booking);
-
-                FileStorage.SaveToFile("bookings.json", HospitalData.Bookings);
-
-                Console.WriteLine("Booking added and saved successfully.");
+                Console.WriteLine("❌ Doctor not found.");
             }
-            catch (Exception ex)
+            else
             {
-                Console.WriteLine($"Failed to add booking: {ex.Message}");
+                // For now, just a dummy availability check
+                Console.WriteLine($"✅ Doctor {doctor.FullName} is currently AVAILABLE.");
             }
+
+            Console.WriteLine("\nPress any key to return...");
+            Console.ReadKey();
         }
 
-        private void ViewMyPatientRecords()
-        {
-            var records = HospitalData.Records
-                .Where(r => r.DoctorName.Equals(_doctor.FullName, StringComparison.OrdinalIgnoreCase))
-                .ToList();
 
-            if (!records.Any())
-            {
-                Console.WriteLine("No records found for you.");
-                return;
-            }
 
-            foreach (var record in records)
-                record.Display();
-        }
 
-        private void WritePatientRecord()
-        {
-            try
-            {
-                Console.Write("Enter Record ID: ");
-                int id = int.Parse(Console.ReadLine());
 
-                Console.Write("Enter Patient Name: ");
-                string patient = Console.ReadLine();
 
-                Console.Write("Enter Diagnosis: ");
-                string diagnosis = Console.ReadLine();
 
-                Console.Write("Enter Prescription: ");
-                string prescription = Console.ReadLine();
-
-                var record = new PatientRecord(id, patient, _doctor.FullName, diagnosis, prescription, DateTime.Now);
-                HospitalData.Records.Add(record);
-
-                FileStorage.SaveToFile("records.json", HospitalData.Records);
-                Console.WriteLine("Patient record saved successfully.");
-
-                Console.WriteLine("✅ Booking added and saved successfully.");
-                Console.WriteLine("Press any key to return to the menu...");
-                Console.ReadKey(); // ✅ Keeps the message visible
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"❌ Failed to add booking: {ex.Message}");
-                Console.WriteLine("Press any key to return to the menu...");
-                Console.ReadKey(); // Also pause on error
-            }
-        }
     }
 }

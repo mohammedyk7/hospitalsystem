@@ -16,6 +16,9 @@ class Program
         HospitalData.Branches = FileStorage.LoadFromFile<Branch>("branches.json");
         HospitalData.Departments = FileStorage.LoadFromFile<Department>("departments.json");
         HospitalData.Clinics = FileStorage.LoadFromFile<Clinic>("clinics.json");
+        HospitalData.Admins = FileStorage.LoadFromFile<Admin>("admins.json");
+        HospitalData.Availabilities = FileStorage.LoadFromFile<DoctorAvailability>("availabilities.json");
+
 
         // Ensure at least one test patient exists
         if (!HospitalData.Patients.Any(p => p.Email == "yusuf@patient.com"))
@@ -30,6 +33,7 @@ class Program
         Console.WriteLine($"Branches: {HospitalData.Branches.Count}");
         Console.WriteLine($"Departments: {HospitalData.Departments.Count}");
         Console.WriteLine($"Clinics: {HospitalData.Clinics.Count}");
+        Console.WriteLine($"Admins: {HospitalData.Admins.Count}"); // Optional: for debug
 
         while (true)
         {
@@ -54,17 +58,17 @@ class Program
                     superAdmin.DisplayMenu();
                     break;
 
-                case "2":
+           case "2":
                     Console.Write("Enter your email: ");
                     string dEmail = Console.ReadLine();
                     Console.Write("Enter your password: ");
                     string dPassword = Console.ReadLine();
 
                     Doctor? doctor = HospitalData.Doctors.FirstOrDefault(d => d.Email == dEmail && d.Password == dPassword);
+
                     if (doctor != null)
                     {
-                        IDoctorService dService = new DoctorService(doctor);
-                        dService.DisplayDoctorMenu();
+                       doctor.DisplayMenu();
                     }
                     else
                     {
@@ -79,7 +83,7 @@ class Program
                     Console.Write("Enter your password: ");
                     string pPassword = Console.ReadLine();
 
-                    Patient? patient = HospitalData.Patients.FirstOrDefault(p => p.Email == pEmail && p.Password == pPassword);
+                    Patient? patient = HospitalData.Patients.FirstOrDefault(p => p.Email == pEmail );
                     if (patient != null)
                     {
                         IPatientService pService = new PatientService(patient);
@@ -98,7 +102,8 @@ class Program
                     Console.Write("Enter your password: ");
                     string aPassword = Console.ReadLine();
 
-                    Admin? admin = HospitalData.Users.OfType<Admin>()
+                    // ✅ FIX: use HospitalData.Admins directly
+                    Admin? admin = HospitalData.Admins
                         .FirstOrDefault(a => a.Email == aEmail && a.Password == aPassword);
 
                     if (admin != null)

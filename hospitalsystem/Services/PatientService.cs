@@ -23,9 +23,10 @@ namespace hospitalsystem.services
                 Console.WriteLine("║ 1. View My Bookings                        ║");
                 Console.WriteLine("║ 2. View My Records                         ║");
                 Console.WriteLine("║ 3. Book Appointment                        ║");
-                Console.WriteLine("║ 4. Exit                                    ║");
+                Console.WriteLine("║ 4. Cancel Booking                          ║");
+                Console.WriteLine("║ 5. Exit                                    ║");
                 Console.WriteLine("╚════════════════════════════════════════════╝");
-                Console.Write("Choose an option (1-4): ");
+                Console.Write("Choose an option (1-5): ");
 
                 string? choice = Console.ReadLine();
 
@@ -42,8 +43,11 @@ namespace hospitalsystem.services
                     case "3":
                         BookAppointment();
                         break;
-
                     case "4":
+                        CancelBooking();
+                        break;
+
+                    case "5":
                         return;
 
                     default:
@@ -59,11 +63,23 @@ namespace hospitalsystem.services
             Console.Clear();
             Console.WriteLine("=== Book Appointment ===");
 
+           
             Console.Write("Enter Booking ID: ");
-            int bookingId = int.Parse(Console.ReadLine()!);
+            if (!int.TryParse(Console.ReadLine(), out int bookingId))
+            {
+                Console.WriteLine("❌ Invalid Booking ID.");
+                return;
+            }
 
+
+            
             Console.Write("Enter Clinic ID: ");
-            int clinicId = int.Parse(Console.ReadLine()!);
+            if (!int.TryParse(Console.ReadLine(), out int clinicId))
+            {
+                Console.WriteLine("❌ Invalid Clinic ID.");
+                return;
+            }
+
 
             Console.Write("Enter Doctor Email: ");
             string doctorEmail = Console.ReadLine()!;
@@ -75,7 +91,7 @@ namespace hospitalsystem.services
             HospitalData.Bookings.Add(booking);
             FileStorage.SaveToFile("bookings.json", HospitalData.Bookings);
 
-            Console.WriteLine("✅ Appointment booked successfully!");
+            Console.WriteLine(" Appointment booked successfully!");
             Console.ReadKey();
         }
 
@@ -122,5 +138,30 @@ namespace hospitalsystem.services
 
             Console.ReadKey();
         }
+
+        public void CancelBooking()
+        {
+            Console.Write("Enter Booking ID to cancel: ");
+            if (!int.TryParse(Console.ReadLine(), out int bookingId))
+            {
+                Console.WriteLine("❌ Invalid ID.");
+                return;
+            }
+
+            var booking = HospitalData.Bookings.FirstOrDefault(b => b.Id == bookingId && b.PatientEmail == _patient.Email && !b.IsCancelled);
+            if (booking == null)
+            {
+                Console.WriteLine("❌ Booking not found or already cancelled.");
+                return;
+            }
+
+            Console.Write("Enter cancellation reason: ");
+            booking.CancellationReason = Console.ReadLine();
+            booking.IsCancelled = true;
+            FileStorage.SaveToFile("bookings.json", HospitalData.Bookings);
+            Console.WriteLine("✅ Booking cancelled successfully.");
+            Console.ReadKey();
+        }
+
     }
 }

@@ -10,6 +10,9 @@ namespace hospitalsystem.models
         public int ClinicId { get; set; }
         public DateTime AppointmentDate { get; set; }
 
+        public bool IsCancelled { get; set; } = false;
+        public string? CancellationReason { get; set; }
+
         public Booking() { }
 
         public Booking(int id, string patientEmail, string doctorEmail, int clinicId, DateTime appointmentDate)
@@ -21,9 +24,20 @@ namespace hospitalsystem.models
             AppointmentDate = appointmentDate;
         }
 
+        public void Cancel(string reason = "")
+        {
+            IsCancelled = true;
+            CancellationReason = reason;
+        }
+
         public void Display()
         {
             Console.WriteLine($"📋 Booking #{Id}: Patient {PatientEmail} with Dr. {DoctorEmail} at Clinic {ClinicId} on {AppointmentDate}");
+
+            if (IsCancelled)
+            {
+                Console.WriteLine($"❌ CANCELLED - Reason: {CancellationReason ?? "Not specified"}");
+            }
         }
     }
 }
