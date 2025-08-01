@@ -65,7 +65,7 @@ namespace hospitalsystem.services
 
            
             Console.Write("Enter Booking ID: ");
-            if (!int.TryParse(Console.ReadLine(), out int bookingId))
+            if (!int.TryParse(Console.ReadLine(), out int bookingId))// Validate the booking ID input
             {
                 Console.WriteLine("❌ Invalid Booking ID.");
                 return;
