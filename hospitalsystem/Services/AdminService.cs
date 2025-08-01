@@ -120,17 +120,17 @@ namespace hospitalsystem.services
             Console.ReadKey();
         }
 
-        public static void DeleteAdmin()
+        public static void DeleteAdmin()// This method allows deleting an admin from the system
         {
             Console.Write("Enter Admin ID to delete: ");
             string id = Console.ReadLine()!;
             var admin = HospitalData.Admins.FirstOrDefault(a => a.Id == id);
 
-            if (admin == null)
+            if (admin == null)// Check if the admin exists
             {
                 Console.WriteLine("❌ Admin not found.");
             }
-            else
+            else// If the admin exists, remove them from the list
             {
                 HospitalData.Admins.Remove(admin);
                 FileStorage.SaveToFile("admins.json", HospitalData.Admins);
