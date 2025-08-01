@@ -115,9 +115,9 @@ namespace hospitalsystem.services
             }
 
             var doctor = new Doctor(name, email, password, clinicId);
-            HospitalData.Doctors.Add(doctor);
+            HospitalData.Doctors.Add(doctor);// Add the new doctor to the hospital data
             FileStorage.SaveToFile("doctors.json", HospitalData.Doctors);
-            Console.WriteLine("✅ Doctor added successfully.");
+            Console.WriteLine(" Doctor added successfully.");
             Console.ReadKey();
         }
 
