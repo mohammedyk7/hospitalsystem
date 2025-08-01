@@ -98,10 +98,10 @@ namespace hospitalsystem.services
             {
                 Console.Write("Enter Clinic ID: ");
                 string? input = Console.ReadLine();
-                if (int.TryParse(input, out clinicId))
+                if (int.TryParse(input, out clinicId))// Try to parse the input as an integer
                     break;
 
-                Console.WriteLine("❌ Invalid Clinic ID. Please enter a valid number.");
+                Console.WriteLine(" Invalid Clinic ID. Please enter a valid number.");
             }
 
             // ✅ Check for duplicate doctor
