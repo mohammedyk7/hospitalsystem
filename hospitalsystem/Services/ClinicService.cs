@@ -110,7 +110,7 @@ namespace hospitalsystem.services
                     Console.WriteLine("❌ Clinic not found.");
                     Console.ReadKey();
                 }
-                else
+                else// If the clinic is found, it prompts the user to enter new details
                 {
                     Console.Write("Enter new name: ");
                     clinic.Name = Console.ReadLine();
