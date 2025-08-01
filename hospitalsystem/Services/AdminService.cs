@@ -59,7 +59,7 @@ namespace hospitalsystem.services
 
             if (HospitalData.Admins.Any(a => a.Email.Equals(email, StringComparison.OrdinalIgnoreCase)))// Check if an admin with the same email already exists
             {
-                Console.WriteLine("⚠️ Admin with this email already exists.");
+                Console.WriteLine(" Admin with this email already exists.");
                 Console.ReadKey();
                 return;
             }
@@ -102,7 +102,7 @@ namespace hospitalsystem.services
 
             if (admin == null)// Check if the admin exists
             {
-                Console.WriteLine("❌ Admin not found.");
+                Console.WriteLine(" Admin not found.");
             }
             else// If the admin exists, prompt for new details
             {
@@ -114,7 +114,7 @@ namespace hospitalsystem.services
                 admin.Password = Console.ReadLine()!;
 
                 FileStorage.SaveToFile("admins.json", HospitalData.Admins);// Save the updated admin list to file
-                Console.WriteLine("✅ Admin updated successfully.");
+                Console.WriteLine(" Admin updated successfully.");
             }
 
             Console.ReadKey();
@@ -148,11 +148,11 @@ namespace hospitalsystem.services
 
             if (admin == null)
             {
-                Console.WriteLine("❌ Admin not found.");
+                Console.WriteLine(" Admin not found.");
             }
             else
             {
-                Console.WriteLine($"🧾 Admin Info:\nID: {admin.Id}\nName: {admin.FullName}\nEmail: {admin.Email}");
+                Console.WriteLine($" Admin Info:\nID: {admin.Id}\nName: {admin.FullName}\nEmail: {admin.Email}");
             }
 
             Console.WriteLine("Press any key to return...");
@@ -191,13 +191,13 @@ namespace hospitalsystem.services
                         clinicService.DisplayClinicMenu();
                         break;
                     case "2":
-                        ViewAllClinics();
+                        ViewAllClinics();// Display all clinics
                         break;
                     case "3":
-                        ViewAllBranches();
+                        ViewAllBranches();// Display all branches
                         break;
                     case "4":
-                        ViewAllDepartments();
+                        ViewAllDepartments();// Display all departments
                         break;
                     case "5":
                         CancelBookingByAdmin(); // Make sure this method exists in your AdminService
@@ -220,7 +220,7 @@ namespace hospitalsystem.services
             int id = int.Parse(Console.ReadLine()!);
             if (HospitalData.Clinics.Any(c => c.Id == id))// Check if a clinic with the same ID already exists
             {
-                Console.WriteLine("❌ Clinic ID already exists.");
+                Console.WriteLine(" Clinic ID already exists.");
                 Console.ReadKey();
                 return;
             }
@@ -229,7 +229,7 @@ namespace hospitalsystem.services
             string name = Console.ReadLine()!;
             if (HospitalData.Clinics.Any(c => c.Name.Equals(name, StringComparison.OrdinalIgnoreCase)))// Check if a clinic with the same name already exists
             {
-                Console.WriteLine("❌ Clinic name already exists.");
+                Console.WriteLine(" Clinic name already exists.");
                 Console.ReadKey();
                 return;
             }
@@ -243,7 +243,7 @@ namespace hospitalsystem.services
                 if (int.TryParse(input, out branchId))
                     break;
 
-                Console.WriteLine("❌ Invalid input. Please enter a valid number.");
+                Console.WriteLine(" Invalid input. Please enter a valid number.");
             }
 
             var clinic = new Clinic(id, name, branchId);
@@ -251,7 +251,7 @@ namespace hospitalsystem.services
             HospitalData.Clinics.Add(clinic);
             FileStorage.SaveToFile("clinics.json", HospitalData.Clinics);
 
-            Console.WriteLine("✅ Clinic created successfully.");
+            Console.WriteLine(" Clinic created successfully.");
             Console.ReadKey();
         }
 
@@ -314,7 +314,7 @@ namespace hospitalsystem.services
             booking.CancellationReason = Console.ReadLine();
             booking.IsCancelled = true;
             FileStorage.SaveToFile("bookings.json", HospitalData.Bookings);
-            Console.WriteLine("✅ Booking cancelled successfully by admin.");
+            Console.WriteLine(" Booking cancelled successfully by admin.");
             Console.ReadKey();
         }
 
