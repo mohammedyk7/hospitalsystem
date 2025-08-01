@@ -136,14 +136,14 @@ namespace hospitalsystem.services
             }
             else
             {
-                foreach (var record in myRecords)
+                foreach (var record in myRecords)// If there are records, display them
                     record.Display();
             }
 
             Console.ReadKey();
         }
 
-        public void CancelBooking()
+        public void CancelBooking()// This method allows the patient to cancel an existing booking
         {
             Console.Write("Enter Booking ID to cancel: ");
             if (!int.TryParse(Console.ReadLine(), out int bookingId))
