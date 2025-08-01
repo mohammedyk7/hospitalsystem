@@ -92,7 +92,7 @@ namespace hospitalsystem.services
             DateTime date = DateTime.Parse(Console.ReadLine()!);// Validate the date input
 
             var booking = new Booking(bookingId, _patient.Email, doctorEmail, clinicId, date);// Create a new booking object
-            HospitalData.Bookings.Add(booking);
+            HospitalData.Bookings.Add(booking);// Add the booking to the hospital data
             FileStorage.SaveToFile("bookings.json", HospitalData.Bookings);
 
             Console.WriteLine(" Appointment booked successfully!");
