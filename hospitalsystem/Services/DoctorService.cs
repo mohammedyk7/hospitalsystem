@@ -224,20 +224,20 @@ namespace hospitalsystem.services
             Console.WriteLine("║           SEARCH FOR DOCTOR          ║");
             Console.WriteLine("╚══════════════════════════════════════╝");
 
-            Console.Write("🔍 Enter Doctor Name or Email to search: ");
+            Console.Write(" Enter Doctor Name or Email to search: ");
             string query = Console.ReadLine()!.Trim().ToLower();
 
             var matchedDoctors = HospitalData.Doctors
                 .Where(d => d.FullName.ToLower().Contains(query) || d.Email.ToLower().Contains(query))
                 .ToList();
 
-            if (!matchedDoctors.Any())
+            if (!matchedDoctors.Any())// If no doctors match the search criteria, show a message
             {
-                Console.WriteLine("❌ No matching doctors found.");
+                Console.WriteLine(" No matching doctors found.");
             }
             else
             {
-                Console.WriteLine("\n✅ Matching Doctors:");
+                Console.WriteLine("\n Matching Doctors:");
                 foreach (var doc in matchedDoctors)
                 {
                     doc.Display();
