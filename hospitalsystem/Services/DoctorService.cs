@@ -201,16 +201,16 @@ namespace hospitalsystem.services
             Console.Write("Enter Doctor Email: ");
             string email = Console.ReadLine()!;
 
-            var doctor = HospitalData.Doctors.FirstOrDefault(d => d.Email.Equals(email, StringComparison.OrdinalIgnoreCase));
+            var doctor = HospitalData.Doctors.FirstOrDefault(d => d.Email.Equals(email, StringComparison.OrdinalIgnoreCase));// Check if a doctor with the given email exists
             if (doctor == null)
             {
                 Console.WriteLine("Doctor not found.");
             }
             else
             {
-                Console.Write("Enter new Clinic ID: ");
+                Console.Write("Enter new Clinic ID: ");// Prompt the user to enter a new clinic ID
                 int newClinicId = int.Parse(Console.ReadLine()!);
-                doctor.ClinicId = newClinicId;
+                doctor.ClinicId = newClinicId;// Update the doctor's clinic ID
                 FileStorage.SaveToFile("doctors.json", HospitalData.Doctors);
                 Console.WriteLine("Doctor assigned to new clinic.");
             }
