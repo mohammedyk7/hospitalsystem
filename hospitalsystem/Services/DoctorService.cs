@@ -259,12 +259,12 @@ namespace hospitalsystem.services
 
             if (doctor == null)
             {
-                Console.WriteLine("❌ Doctor not found.");
+                Console.WriteLine(" Doctor not found.");
             }
             else
             {
                 // For now, just a dummy availability check
-                Console.WriteLine($"✅ Doctor {doctor.FullName} is currently AVAILABLE.");// Show a message indicating the doctor's availability status
+                Console.WriteLine($" Doctor {doctor.FullName} is currently AVAILABLE.");// Show a message indicating the doctor's availability status
             }
 
             Console.WriteLine("\nPress any key to return...");
