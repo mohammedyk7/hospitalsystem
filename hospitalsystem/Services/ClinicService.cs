@@ -174,7 +174,7 @@ namespace hospitalsystem.services
             if (int.TryParse(Console.ReadLine(), out int id))// This checks if the input is a valid integer
             {
                 var clinic = HospitalData.Clinics.FirstOrDefault(c => c.Id == id);// This searches for the clinic with the specified ID
-                if (clinic == null)
+                if (clinic == null)// If the clinic is not found, it displays a message
                 {
                     Console.WriteLine(" Clinic not found.");
                     Console.ReadKey();
