@@ -164,7 +164,7 @@ namespace hospitalsystem.services
 
 
 
-        public  void DisplayAdminMenu()
+        public  void DisplayAdminMenu()// This method displays the admin menu and handles user input for admin operations
         {
             while (true)
             {
@@ -214,11 +214,11 @@ namespace hospitalsystem.services
 
 
 
-        public void AddClinic()
+        public void AddClinic()// This method allows the admin to add a new clinic
         {
             Console.Write("Enter Clinic ID: ");
             int id = int.Parse(Console.ReadLine()!);
-            if (HospitalData.Clinics.Any(c => c.Id == id))
+            if (HospitalData.Clinics.Any(c => c.Id == id))// Check if a clinic with the same ID already exists
             {
                 Console.WriteLine("❌ Clinic ID already exists.");
                 Console.ReadKey();
