@@ -37,7 +37,7 @@ namespace hospitalsystem.services
                         DeleteClinic();// This method allows the user to delete a clinic
                         break;
                     case "5":
-                        SearchClinicById();
+                        SearchClinicById();// This method allows the user to search for a clinic by its ID
                         break;
                     case "6":
                         return;
