@@ -28,7 +28,7 @@ namespace hospitalsystem.services
                         AddClinic();// This method allows the user to add a new clinic
                         break;
                     case "2":
-                        ViewClinics();
+                        ViewClinics();// This method displays all clinics
                         break;
                     case "3":
                         UpdateClinic();
