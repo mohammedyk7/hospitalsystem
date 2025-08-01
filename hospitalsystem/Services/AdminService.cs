@@ -140,7 +140,7 @@ namespace hospitalsystem.services
             Console.ReadKey();
         }
 
-        public static void SearchAdminById()
+        public static void SearchAdminById()// This method allows searching for an admin by their ID
         {
             Console.Write("Enter Admin ID to search: ");
             string id = Console.ReadLine()!;
