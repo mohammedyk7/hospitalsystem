@@ -139,28 +139,28 @@ namespace hospitalsystem.services
 
 
 
-        public void DeleteClinic()
+        public void DeleteClinic()// This method allows the user to delete a clinic
         {
             Console.Write("Enter Clinic ID to delete: ");
             if (int.TryParse(Console.ReadLine(), out int id))
             {
-                var clinic = HospitalData.Clinics.FirstOrDefault(c => c.Id == id);
+                var clinic = HospitalData.Clinics.FirstOrDefault(c => c.Id == id);// This searches for the clinic with the specified ID
                 if (clinic == null)
                 {
-                    Console.WriteLine("❌ Clinic not found.");
+                    Console.WriteLine(" Clinic not found.");
                     Console.ReadKey();
                 }
                 else
                 {
-                    HospitalData.Clinics.Remove(clinic);
+                    HospitalData.Clinics.Remove(clinic);// This removes the clinic from the list
                     FileStorage.SaveToFile("clinics.json", HospitalData.Clinics);
-                    Console.WriteLine("✅ Clinic deleted.");
+                    Console.WriteLine(" Clinic deleted.");
                     Console.ReadKey();
                 }
             }
             else
             {
-                Console.WriteLine("❌ Invalid Clinic ID.");
+                Console.WriteLine(" Invalid Clinic ID.");
                 Console.ReadKey();
             }
 
