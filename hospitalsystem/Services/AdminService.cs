@@ -69,7 +69,7 @@ namespace hospitalsystem.services
 
             var admin = new Admin(name, email, password);
             HospitalData.Admins.Add(admin);
-            FileStorage.SaveToFile("admins.json", HospitalData.Admins);
+            FileStorage.SaveToFile("admins.json", HospitalData.Admins);// Save the new admin to the file
 
             Console.WriteLine("✅ Admin created successfully.");
             Console.ReadKey();
