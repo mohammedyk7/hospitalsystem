@@ -33,7 +33,7 @@ namespace hospitalsystem.services
                 switch (choice)
                 {
                     case "1":
-                        ViewMyBookings();
+                        ViewMyBookings();// This method displays the patient's bookings
                         break;
 
                     case "2":
