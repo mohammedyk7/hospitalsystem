@@ -9,7 +9,7 @@ namespace hospitalsystem.services
 
         public PatientService(Patient patient)
         {
-            _patient = patient;
+            _patient = patient;// Initialize the patient service with the logged-in patient
         }
 
         public void DisplayPatientMenu()
