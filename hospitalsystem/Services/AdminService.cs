@@ -269,7 +269,7 @@ namespace hospitalsystem.services
                 clinic.Display();
         }
 
-        private void ViewAllBranches()
+        public void ViewAllBranches()//
         {
             if (!HospitalData.Branches.Any())
             {
@@ -281,7 +281,7 @@ namespace hospitalsystem.services
                 branch.Display();
         }
 
-        private void ViewAllDepartments()
+        public void ViewAllDepartments() //this method allows admin too view all the departments 
         {
             if (!HospitalData.Departments.Any())
             {
@@ -298,14 +298,14 @@ namespace hospitalsystem.services
             Console.Write("Enter Booking ID to cancel: ");
             if (!int.TryParse(Console.ReadLine(), out int bookingId))
             {
-                Console.WriteLine("❌ Invalid ID.");
+                Console.WriteLine(" Invalid ID.");
                 return;
             }
 
             var booking = HospitalData.Bookings.FirstOrDefault(b => b.Id == bookingId && !b.IsCancelled);// Check if booking exists and is not already cancelled
             if (booking == null)
             {
-                Console.WriteLine("❌ Booking not found or already cancelled.");
+                Console.WriteLine(" Booking not found or already cancelled.");
                 return;
             }
 
