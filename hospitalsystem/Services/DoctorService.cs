@@ -108,8 +108,8 @@ namespace hospitalsystem.services
             if (HospitalData.Doctors.Any(d =>
                 d.FullName.Equals(name, StringComparison.OrdinalIgnoreCase) ||
                 d.Email.Equals(email, StringComparison.OrdinalIgnoreCase)))
-            {
-                Console.WriteLine("❌ A doctor with this name or email already exists.");
+            {// If a doctor with the same name or email already exists, show an error message
+                Console.WriteLine(" A doctor with this name or email already exists.");
                 Console.ReadKey();
                 return;
             }
