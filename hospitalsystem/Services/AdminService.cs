@@ -75,16 +75,16 @@ namespace hospitalsystem.services
             Console.ReadKey();
         }
 
-        public static void ViewAllAdmins()
+        public static void ViewAllAdmins()// This method displays all admins in the system
         {
             if (!HospitalData.Admins.Any())
             {
-                Console.WriteLine("❌ No admins found.");
+                Console.WriteLine("❌ No admins found.");// Check if there are any admins
             }
             else
             {
                 Console.WriteLine("📋 List of Admins:");
-                foreach (var admin in HospitalData.Admins)
+                foreach (var admin in HospitalData.Admins)// Loop through each admin and display their details
                 {
                     Console.WriteLine($"🆔 ID: {admin.Id}, Name: {admin.FullName}, Email: {admin.Email}");
                 }
