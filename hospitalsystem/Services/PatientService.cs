@@ -148,14 +148,14 @@ namespace hospitalsystem.services
             Console.Write("Enter Booking ID to cancel: ");
             if (!int.TryParse(Console.ReadLine(), out int bookingId))// Validate the booking ID input
             {
-                Console.WriteLine("❌ Invalid ID.");
+                Console.WriteLine(" Invalid ID.");
                 return;
             }
 
             var booking = HospitalData.Bookings.FirstOrDefault(b => b.Id == bookingId && b.PatientEmail == _patient.Email && !b.IsCancelled);// Find the booking by ID and ensure it belongs to the patient and is not already cancelled
             if (booking == null)
             {
-                Console.WriteLine("❌ Booking not found or already cancelled.");
+                Console.WriteLine(" Booking not found or already cancelled.");
                 return;
             }
 
@@ -163,7 +163,7 @@ namespace hospitalsystem.services
             booking.CancellationReason = Console.ReadLine();
             booking.IsCancelled = true;// Mark the booking as cancelled
             FileStorage.SaveToFile("bookings.json", HospitalData.Bookings);
-            Console.WriteLine("✅ Booking cancelled successfully.");
+            Console.WriteLine(" Booking cancelled successfully.");
             Console.ReadKey();
         }
 
