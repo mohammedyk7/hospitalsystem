@@ -269,7 +269,7 @@ namespace hospitalsystem.services
                 clinic.Display();
         }
 
-        public void ViewAllBranches()//
+        public void ViewAllBranches() 
         {
             if (!HospitalData.Branches.Any())
             {
@@ -277,7 +277,7 @@ namespace hospitalsystem.services
                 return;
             }
 
-            foreach (var branch in HospitalData.Branches)
+            foreach (var branch in HospitalData.Branches)//foreach branch admin can display 
                 branch.Display();
         }
 
