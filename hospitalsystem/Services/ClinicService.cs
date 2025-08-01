@@ -168,27 +168,27 @@ namespace hospitalsystem.services
             Console.ReadKey();
         }
 
-        public void SearchClinicById()
+        public void SearchClinicById()// This method allows the user to search for a clinic by its ID
         {
             Console.Write("Enter Clinic ID to search: ");
-            if (int.TryParse(Console.ReadLine(), out int id))
+            if (int.TryParse(Console.ReadLine(), out int id))// This checks if the input is a valid integer
             {
                 var clinic = HospitalData.Clinics.FirstOrDefault(c => c.Id == id);
                 if (clinic == null)
                 {
-                    Console.WriteLine("❌ Clinic not found.");
+                    Console.WriteLine(" Clinic not found.");
                     Console.ReadKey();
                 }
                 else
                 {
-                    Console.WriteLine($"🔍 Found Clinic:");
+                    Console.WriteLine($" Found Clinic:");
                     Console.WriteLine($"ID: {clinic.Id}, Name: {clinic.Name}, Dept ID: {clinic.DepartmentId}, Branch ID: {clinic.BranchId}");
                     Console.ReadKey();
                 }
             }
             else
             {
-                Console.WriteLine("❌ Invalid input.");
+                Console.WriteLine(" Invalid input.");
                 Console.ReadKey();
             }
 
