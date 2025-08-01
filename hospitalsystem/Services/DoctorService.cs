@@ -125,7 +125,7 @@ namespace hospitalsystem.services
 
 
 
-        public static void ViewAllDoctors()
+        public static void ViewAllDoctors()// This method displays all doctors in the system
         {
             Console.Clear();
             Console.WriteLine("╔══════════════════════════════════════════════════════════════════╗");
@@ -134,14 +134,14 @@ namespace hospitalsystem.services
 
             if (HospitalData.Doctors.Count == 0)
             {
-                Console.WriteLine("║                     ❌ No doctors found.                        ║");
+                Console.WriteLine("║                      No doctors found.                        ║");
             }
             else
             {
                 foreach (var doc in HospitalData.Doctors)
                 {
                     Console.WriteLine($"║ Name     : {doc.FullName,-20} Email: {doc.Email,-25} ║");
-                    Console.WriteLine($"║ ClinicID : {doc.ClinicId,-10} Available: {(doc.IsAvailable ? "✅ Yes" : "❌ No"),-10}               ║");
+                    Console.WriteLine($"║ ClinicID : {doc.ClinicId,-10} Available: {(doc.IsAvailable ? " Yes" : " No"),-10}               ║");
                     Console.WriteLine("╠──────────────────────────────────────────────────────────────────╣");
                 }
             }
@@ -152,7 +152,7 @@ namespace hospitalsystem.services
         }
 
 
-        public static void ToggleDoctorAvailability()
+        public static void ToggleDoctorAvailability()// This method allows the user to toggle a doctor's availability by their email
         {
             Console.Write("Enter Doctor Email to change availability: ");
             string email = Console.ReadLine()!.Trim().ToLower();
