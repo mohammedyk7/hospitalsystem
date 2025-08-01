@@ -104,7 +104,7 @@ namespace hospitalsystem.services
             Console.Write("Enter Clinic ID to update: ");
             if (int.TryParse(Console.ReadLine(), out int id))
             {
-                var clinic = HospitalData.Clinics.FirstOrDefault(c => c.Id == id);
+                var clinic = HospitalData.Clinics.FirstOrDefault(c => c.Id == id);// This searches for the clinic with the specified ID
                 if (clinic == null)
                 {
                     Console.WriteLine("❌ Clinic not found.");
