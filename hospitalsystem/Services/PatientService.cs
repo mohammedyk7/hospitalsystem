@@ -74,7 +74,11 @@ namespace hospitalsystem.services
 
             
             Console.Write("Enter Clinic ID: ");
-            if (!int.TryParse(Console.ReadLine(), out int clinicId))
+            if (!int.TryParse(Console.ReadLine(), out int clinicId))// Validate the clinic ID input
+            {
+                Console.WriteLine("❌ Invalid Clinic ID.");
+                return;
+            }
             {
                 Console.WriteLine("❌ Invalid Clinic ID.");
                 return;
