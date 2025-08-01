@@ -108,7 +108,7 @@ namespace hospitalsystem.services
                 .Where(b => b.PatientEmail.Equals(_patient.Email, StringComparison.OrdinalIgnoreCase))// Filter bookings by the patient's email
                 .ToList();
 
-            if (!myBookings.Any())
+            if (!myBookings.Any())// Check if there are any bookings for the patient
             {
                 Console.WriteLine("No bookings found.");
             }
