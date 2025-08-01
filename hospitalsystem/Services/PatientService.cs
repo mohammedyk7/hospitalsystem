@@ -99,7 +99,7 @@ namespace hospitalsystem.services
             Console.ReadKey();
         }
 
-        public void ViewMyBookings()
+        public void ViewMyBookings()// This method displays the patient's bookings
         {
             Console.Clear();
             Console.WriteLine("=== Your Bookings ===");
