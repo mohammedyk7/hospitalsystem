@@ -66,7 +66,7 @@ namespace hospitalsystem.services
                 Console.Write("Enter Branch ID: ");
                 int branchId = int.Parse(Console.ReadLine());
 
-                var clinic = new Clinic(id, name, departmentId, branchId);
+                var clinic = new Clinic(id, name, departmentId, branchId);// This creates a new Clinic object with the provided details
                 HospitalData.Clinics.Add(clinic);
 
                 FileStorage.SaveToFile("clinics.json", HospitalData.Clinics);
