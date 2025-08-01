@@ -69,14 +69,14 @@ namespace hospitalsystem.services
                 var clinic = new Clinic(id, name, departmentId, branchId);// This creates a new Clinic object with the provided details
                 HospitalData.Clinics.Add(clinic);
 
-                FileStorage.SaveToFile("clinics.json", HospitalData.Clinics);
+                FileStorage.SaveToFile("clinics.json", HospitalData.Clinics);// This saves the updated list of clinics to a JSON file
 
-                Console.WriteLine("✅ Clinic added and saved successfully.");
+                Console.WriteLine(" Clinic added and saved successfully.");
                 Console.ReadKey();
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"❌ Failed to add clinic: {ex.Message}");
+                Console.WriteLine($" Failed to add clinic: {ex.Message}");
                 Console.ReadKey();
             }
         }
