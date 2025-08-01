@@ -49,7 +49,7 @@ namespace hospitalsystem.services
             }
         }
 
-        public static void CreateAdmin()
+        public static void CreateAdmin()// This method allows the creation of a new admin
         {
             Console.Write("Enter Admin Full Name: ");
             string name = Console.ReadLine()!;
@@ -57,7 +57,7 @@ namespace hospitalsystem.services
             Console.Write("Enter Admin Email: ");
             string email = Console.ReadLine()!;
 
-            if (HospitalData.Admins.Any(a => a.Email.Equals(email, StringComparison.OrdinalIgnoreCase)))
+            if (HospitalData.Admins.Any(a => a.Email.Equals(email, StringComparison.OrdinalIgnoreCase)))// Check if an admin with the same email already exists
             {
                 Console.WriteLine("⚠️ Admin with this email already exists.");
                 Console.ReadKey();
