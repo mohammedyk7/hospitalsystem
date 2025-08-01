@@ -94,17 +94,17 @@ namespace hospitalsystem.services
             Console.ReadKey();
         }
 
-        public static void UpdateAdmin()
+        public static void UpdateAdmin()// This method allows updating an existing admin's details
         {
             Console.Write("Enter Admin ID to update: ");
             string id = Console.ReadLine()!;
             var admin = HospitalData.Admins.FirstOrDefault(a => a.Id == id);
 
-            if (admin == null)
+            if (admin == null)// Check if the admin exists
             {
                 Console.WriteLine("❌ Admin not found.");
             }
-            else
+            else// If the admin exists, prompt for new details
             {
                 Console.Write("Enter New Full Name: ");
                 admin.FullName = Console.ReadLine()!;
@@ -113,7 +113,7 @@ namespace hospitalsystem.services
                 Console.Write("Enter New Password: ");
                 admin.Password = Console.ReadLine()!;
 
-                FileStorage.SaveToFile("admins.json", HospitalData.Admins);
+                FileStorage.SaveToFile("admins.json", HospitalData.Admins);// Save the updated admin list to file
                 Console.WriteLine("✅ Admin updated successfully.");
             }
 
