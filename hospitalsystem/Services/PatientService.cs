@@ -12,7 +12,7 @@ namespace hospitalsystem.services
             _patient = patient;// Initialize the patient service with the logged-in patient
         }
 
-        public void DisplayPatientMenu()
+        public void DisplayPatientMenu()// This method displays the patient management menu and handles user input
         {
             while (true)
             {
