@@ -112,7 +112,7 @@ namespace hospitalsystem.services
             {
                 Console.WriteLine("No bookings found.");
             }
-            else
+            else// If there are bookings, display them
             {
                 foreach (var booking in myBookings)
                     booking.Display();
@@ -121,7 +121,7 @@ namespace hospitalsystem.services
             Console.ReadKey();
         }
 
-        public void ViewMyRecords()
+        public void ViewMyRecords()// This method displays the patient's medical records
         {
             Console.Clear();
             Console.WriteLine("=== Your Medical Records ===");
