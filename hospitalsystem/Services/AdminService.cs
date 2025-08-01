@@ -293,7 +293,7 @@ namespace hospitalsystem.services
                 dept.Display();
         }
 
-        public void CancelBookingByAdmin() 
+        public void CancelBookingByAdmin()// This method allows an admin to cancel a booking
         {
             Console.Write("Enter Booking ID to cancel: ");
             if (!int.TryParse(Console.ReadLine(), out int bookingId))
