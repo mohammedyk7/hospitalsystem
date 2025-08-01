@@ -41,7 +41,7 @@ namespace hospitalsystem.services
                         break;
 
                     case "3":
-                        BookAppointment();
+                        BookAppointment();// This method allows the patient to book a new appointment
                         break;
                     case "4":
                         CancelBooking();
