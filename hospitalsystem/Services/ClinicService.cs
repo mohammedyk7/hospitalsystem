@@ -34,7 +34,7 @@ namespace hospitalsystem.services
                         UpdateClinic();// This method allows the user to update an existing clinic
                         break;
                     case "4":
-                        DeleteClinic();
+                        DeleteClinic();// This method allows the user to delete a clinic
                         break;
                     case "5":
                         SearchClinicById();
