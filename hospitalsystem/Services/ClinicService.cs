@@ -83,7 +83,7 @@ namespace hospitalsystem.services
 
         public void ViewClinics()// This method displays all clinics in the system
         {
-            if (!HospitalData.Clinics.Any())
+            if (!HospitalData.Clinics.Any())// This checks if there are any clinics in the system
             {
                 Console.WriteLine("No clinics found.");
                 Console.ReadKey();
