@@ -81,7 +81,7 @@ namespace hospitalsystem.services
             }
         }
 
-        public void ViewClinics()
+        public void ViewClinics()// This method displays all clinics in the system
         {
             if (!HospitalData.Clinics.Any())
             {
