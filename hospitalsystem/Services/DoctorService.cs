@@ -217,7 +217,7 @@ namespace hospitalsystem.services
             Console.ReadKey();
         }
 
-        public static void SearchDoctor()
+        public static void SearchDoctor()// This method allows the user to search for a doctor by name or email
         {
             Console.Clear();
             Console.WriteLine("╔══════════════════════════════════════╗");
