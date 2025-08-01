@@ -166,9 +166,9 @@ namespace hospitalsystem.services
             }
             else
             {
-                doctor.IsAvailable = !doctor.IsAvailable;
+                doctor.IsAvailable = !doctor.IsAvailable;// Toggle the doctor's availability status
                 FileStorage.SaveToFile("doctors.json", HospitalData.Doctors);
-                Console.WriteLine($"✅ Availability updated to: {(doctor.IsAvailable ? "Available" : "Not Available")}");
+                Console.WriteLine($"✅ Availability updated to: {(doctor.IsAvailable ? "Available" : "Not Available")}");// Show a success message with the updated availability status
             }
 
             Console.WriteLine("\nPress any key to return...");
