@@ -127,7 +127,7 @@ namespace hospitalsystem.services
             Console.WriteLine("=== Your Medical Records ===");
 
             var myRecords = HospitalData.Records// Retrieve all records from the hospital data
-                .Where(r => r.PatientName.Equals(_patient.FullName, StringComparison.OrdinalIgnoreCase))
+                .Where(r => r.PatientName.Equals(_patient.FullName, StringComparison.OrdinalIgnoreCase))// Filter records by the patient's name
                 .ToList();
 
             if (!myRecords.Any())
