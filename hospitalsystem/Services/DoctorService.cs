@@ -168,7 +168,7 @@ namespace hospitalsystem.services
             {
                 doctor.IsAvailable = !doctor.IsAvailable;// Toggle the doctor's availability status
                 FileStorage.SaveToFile("doctors.json", HospitalData.Doctors);
-                Console.WriteLine($"✅ Availability updated to: {(doctor.IsAvailable ? "Available" : "Not Available")}");// Show a success message with the updated availability status
+                Console.WriteLine($" Availability updated to: {(doctor.IsAvailable ? "Available" : "Not Available")}");// Show a success message with the updated availability status
             }
 
             Console.WriteLine("\nPress any key to return...");
@@ -177,12 +177,12 @@ namespace hospitalsystem.services
 
 
 
-        public static void DeleteDoctor()
+        public static void DeleteDoctor()// This method allows the user to delete a doctor by their email
         {
             Console.Write("Enter Doctor Email to delete: ");
             string email = Console.ReadLine()!;
 
-            var doctor = HospitalData.Doctors.FirstOrDefault(d => d.Email.Equals(email, StringComparison.OrdinalIgnoreCase));
+            var doctor = HospitalData.Doctors.FirstOrDefault(d => d.Email.Equals(email, StringComparison.OrdinalIgnoreCase));// Check if a doctor with the given email exists
             if (doctor == null)
             {
                 Console.WriteLine("Doctor not found.");
