@@ -225,9 +225,9 @@ namespace hospitalsystem.services
                 return;
             }
 
-            Console.Write("Enter Clinic Name: ");
+            Console.Write("Enter Clinic Name: ");// Prompt for the clinic name
             string name = Console.ReadLine()!;
-            if (HospitalData.Clinics.Any(c => c.Name.Equals(name, StringComparison.OrdinalIgnoreCase)))
+            if (HospitalData.Clinics.Any(c => c.Name.Equals(name, StringComparison.OrdinalIgnoreCase)))// Check if a clinic with the same name already exists
             {
                 Console.WriteLine("❌ Clinic name already exists.");
                 Console.ReadKey();
