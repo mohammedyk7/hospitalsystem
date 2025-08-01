@@ -37,7 +37,7 @@ namespace hospitalsystem.services
                         break;
 
                     case "2":
-                        ViewMyRecords();
+                        ViewMyRecords();// This method displays the patient's medical records
                         break;
 
                     case "3":
