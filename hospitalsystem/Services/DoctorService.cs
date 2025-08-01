@@ -196,7 +196,7 @@ namespace hospitalsystem.services
             Console.ReadKey();
         }
 
-        public static void AssignDoctorToClinic()
+        public static void AssignDoctorToClinic()// This method allows the user to assign a doctor to a clinic by their email
         {
             Console.Write("Enter Doctor Email: ");
             string email = Console.ReadLine()!;
