@@ -159,10 +159,10 @@ namespace hospitalsystem.services
 
             var doctor = HospitalData.Doctors.FirstOrDefault(d =>
                 d.Email.ToLower() == email);
-
+            // If no doctor is found with the given email, show an error message
             if (doctor == null)
             {
-                Console.WriteLine("❌ Doctor not found.");
+                Console.WriteLine(" Doctor not found.");
             }
             else
             {
