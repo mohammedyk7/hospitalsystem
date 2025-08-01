@@ -183,14 +183,14 @@ namespace hospitalsystem.services
             string email = Console.ReadLine()!;
 
             var doctor = HospitalData.Doctors.FirstOrDefault(d => d.Email.Equals(email, StringComparison.OrdinalIgnoreCase));// Check if a doctor with the given email exists
-            if (doctor == null)
+            if (doctor == null)// If no doctor is found with the given email, show an error message
             {
                 Console.WriteLine("Doctor not found.");
             }
             else
             {
                 HospitalData.Doctors.Remove(doctor);
-                FileStorage.SaveToFile("doctors.json", HospitalData.Doctors);
+                FileStorage.SaveToFile("doctors.json", HospitalData.Doctors);// Remove the doctor from the hospital data and save the changes
                 Console.WriteLine("Doctor deleted successfully.");
             }
             Console.ReadKey();
