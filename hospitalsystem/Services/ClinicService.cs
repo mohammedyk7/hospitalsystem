@@ -179,7 +179,7 @@ namespace hospitalsystem.services
                     Console.WriteLine(" Clinic not found.");
                     Console.ReadKey();
                 }
-                else
+                else// If the clinic is found, it displays its details
                 {
                     Console.WriteLine($" Found Clinic:");
                     Console.WriteLine($"ID: {clinic.Id}, Name: {clinic.Name}, Dept ID: {clinic.DepartmentId}, Branch ID: {clinic.BranchId}");
