@@ -90,8 +90,8 @@ namespace hospitalsystem.services
                 return;
             }
 
-            Console.WriteLine("\nList of Clinics:");
-            foreach (var clinic in HospitalData.Clinics)
+            Console.WriteLine("\nList of Clinics:");// This prints a header for the clinic list
+            foreach (var clinic in HospitalData.Clinics)// This iterates through each clinic in the list
             {
                 Console.WriteLine($"ID: {clinic.Id}, Name: {clinic.Name}, Dept ID: {clinic.DepartmentId}, Branch ID: {clinic.BranchId}");
             }
