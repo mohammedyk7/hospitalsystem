@@ -58,7 +58,7 @@ namespace hospitalsystem.services
             }
         }
 
-        public void BookAppointment()
+        public void BookAppointment()// This method allows the patient to book a new appointment
         {
             Console.Clear();
             Console.WriteLine("=== Book Appointment ===");
