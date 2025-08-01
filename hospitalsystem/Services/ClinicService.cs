@@ -31,7 +31,7 @@ namespace hospitalsystem.services
                         ViewClinics();// This method displays all clinics
                         break;
                     case "3":
-                        UpdateClinic();
+                        UpdateClinic();//
                         break;
                     case "4":
                         DeleteClinic();
