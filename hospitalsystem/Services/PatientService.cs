@@ -146,7 +146,7 @@ namespace hospitalsystem.services
         public void CancelBooking()// This method allows the patient to cancel an existing booking
         {
             Console.Write("Enter Booking ID to cancel: ");
-            if (!int.TryParse(Console.ReadLine(), out int bookingId))
+            if (!int.TryParse(Console.ReadLine(), out int bookingId))// Validate the booking ID input
             {
                 Console.WriteLine("❌ Invalid ID.");
                 return;
