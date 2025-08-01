@@ -81,7 +81,7 @@ namespace hospitalsystem.services
 
 
 
-        public static void CreateDoctor()
+        public static void CreateDoctor()// This method allows the user to create a new doctor
         {
             Console.Write("Enter Doctor Name: ");
             string name = Console.ReadLine()!.Trim();
@@ -93,7 +93,7 @@ namespace hospitalsystem.services
             string password = Console.ReadLine()!;
 
             // Validate clinic ID input
-            int clinicId;
+            int clinicId;// This variable will hold the clinic ID
             while (true)
             {
                 Console.Write("Enter Clinic ID: ");
