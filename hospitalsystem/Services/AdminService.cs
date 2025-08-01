@@ -6,6 +6,7 @@ namespace hospitalsystem.services
     {
         private Admin _admin;
 
+        // Constructor to initialize AdminService with a specific Admin instance
         public AdminService(Admin admin)
         {
             _admin = admin;
@@ -269,7 +270,7 @@ namespace hospitalsystem.services
                 clinic.Display();
         }
 
-        public void ViewAllBranches() 
+        public void ViewAllBranches()//
         {
             if (!HospitalData.Branches.Any())
             {
